@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "Jobs.apps.JobsConfig",
+    "Users.apps.UsersConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,6 +82,9 @@ DATABASES = { 'default': { 'ENGINE': 'django.db.backends.postgresql',
                           'PASSWORD': '1WK8otByxh',
                           'HOST': 'verklegt-namskeid-ii.northeurope.cloudapp.azure.com',
                           'PORT': '5432', 
+                          'OPTIONS': {
+                              'options': '-c search_path=vln2_assignment_groups_41'
+                            }
                           }
             }
 
