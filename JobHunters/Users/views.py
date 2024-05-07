@@ -7,3 +7,6 @@ def index(request):
 
 def sign_up_index(request):
     return render(request, 'Users/sign_up.html' )
+
+def log_in_index(request):
+    return render(request, 'Users/log_in.html' )
