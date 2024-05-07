@@ -2,3 +2,17 @@
     background-color: rgb(23, 95, 119);
     border: solid 2px lightblue;
 }
+
+#flex-container {
+   display:flex;
+   flex-direction:column;
+
+   /* fallback height */
+   min-height:100vh;
+
+   /* new small viewport height for modern browsers */
+   min-height:100svh;
+}
+#flex-container > footer {
+   margin-top:auto;
+}
