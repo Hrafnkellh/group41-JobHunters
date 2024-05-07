@@ -4,3 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return render(request, 'Jobs/index.html' )
+
+def frontpage(request):
+    return render(request, 'Jobs/frontpage.html')
