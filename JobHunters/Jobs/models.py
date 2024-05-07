@@ -6,6 +6,7 @@ class JobListing(models.Model):
     description = models.CharField(max_length=255, blank=True)
     salary = models.CharField(max_length=255)
     requirements = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
