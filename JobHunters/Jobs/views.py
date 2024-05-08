@@ -9,10 +9,10 @@ def frontpage(request):
     return render(request, 'Jobs/frontpage.html')
 
 def aboutUs(request):
-    return render(request, 'Jobs/aboutUs.html')
+    return render(request, 'Jobs/about_us.html')
 
 def faq(request):
     return render(request, 'Jobs/faq.html')
 
 def jobTips(request):
-    return render(request, 'Jobs/jobTips.html')
+    return render(request, 'Jobs/job_tips.html')
