@@ -10,3 +10,9 @@ db.sqlite3
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+JobHunters/.idea/inspectionProfiles/profiles_settings.xml
+JobHunters/.idea/JobHunters.iml
+JobHunters/.idea/misc.xml
+JobHunters/.idea/modules.xml
+JobHunters/.idea/vcs.xml
+JobHunters/.idea/sqldialects.xml

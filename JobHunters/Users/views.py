@@ -10,3 +10,12 @@ def sign_up_index(request):
 
 def log_in_index(request):
     return render(request, 'Users/log_in.html' )
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'Users/sign_up.html', {
+        'form': UserCreationForm()
+    })
