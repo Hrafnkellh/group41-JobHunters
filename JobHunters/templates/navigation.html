@@ -12,8 +12,8 @@
         <li><a href="{% url 'frontpage' %}" class="nav-link px-2">home</a></li>
         <li><a href="#" class="nav-link px-2">Jobs</a></li>
         <li><a href="#" class="nav-link px-2">Employers</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
+        <li><a href="faq.html"><button type="button" class="nav-link px-2 link-secondary">FAQs</button></a></li>
+        <li><a href="about_us.html" class="nav-link px-2">About</a></li>
       </ul>
      {% if user.is_authenticated %}
         <div class="col-md-3 text-end">
