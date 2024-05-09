@@ -11,7 +11,7 @@ class User(models.Model):
     
 class JobSeeker(User):
     resume = models.CharField(max_length = 255, blank = True)
-    profile_image_path = models.CharField(max_length=255)
+    profile_image_path = models.CharField(max_length=255, blank = True)
 
     def __str__(self):
         return self.name
