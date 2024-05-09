@@ -12,6 +12,7 @@ def register(request):
 
 def log_in(request):
     return render(request, 'Users/log_in.html' )
+
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
