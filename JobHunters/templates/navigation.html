@@ -16,9 +16,11 @@
     
      {% if user.is_authenticated %}
         <form method="post" action = "{% url 'log_out' %}">
+        <a href="{% url 'profile' %}"><button type="button" class="btn btn-outline-primary me-2">profile</button></a>
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-primary" href = "">logout</button>
+        <button type="submit" class="btn btn-primary" href = "">logout</button>
         </form>
+
      {% else %}   
       <div class="col-md-3 text-end">
           <a href="{% url 'log_in' %}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
