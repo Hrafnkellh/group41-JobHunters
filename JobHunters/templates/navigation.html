@@ -13,17 +13,17 @@
         <li><a href="#" class="nav-link px-2">Jobs</a></li>
         <li><a href="#" class="nav-link px-2">Employers</a></li>
       </ul>
+    
      {% if user.is_authenticated %}
         <div class="col-md-3 text-end">
-        <!--<button type="button" class="btn btn-primary">Sign-up</button>-->
-          <a href="#"><button type="button" class="btn btn-primary">Log out</button></a>
+          <a href="{% url 'log_out' %}">Logout</a>
       </div>
      {% else %}   
       <div class="col-md-3 text-end">
-          <a href="{% url 'log_in_index' %}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
-        <!--<button type="button" class="btn btn-primary">Sign-up</button>-->
-          <a href="{% url 'sign_up_index' %}"><button type="button" class="btn btn-primary">Sign up</button></a>
+          <a href="{% url 'log_in' %}"><button type="button" class="btn btn-outline-primary me-2">Login</button></a>
+          <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Sign up</button></a>
       </div>
-     {% endif %}    
+     {% endif %}
+    
     </header>
 </div>

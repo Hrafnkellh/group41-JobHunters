@@ -128,8 +128,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-LOGIN_URL = '/user/login'
-LOGIN_REDIRECT_URL = '/user/profile'
+LOGIN_URL = '/Users/log_in'
+LOGIN_REDIRECT_URL = '/Users/profile'
 
 
 # Default primary key field type
