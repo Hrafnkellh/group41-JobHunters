@@ -1,3 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+    <form method="POST">
+    
+        <h2>
+          Your profile picture
+        </h2>
+        <img id="profile-pic" alt="Profile picture" />
+        <input type="file" id="profile-pic" />
+        <br>
+
+        
+        <div class="form-floating">
+          <li>
+              <label for="text">First name</label>
+              <input type="text" class="form-control" id="first_name">
+          </li>
+            
+          <li>
+            <label for="text">Last name</label>
+            <input type="text" class="form-control" id="last_name">
+          </li>
+        </div>
+        
+        <input type="submit" class="btn btn-primary" value="Update">
+    </form>
 {% endblock %}
