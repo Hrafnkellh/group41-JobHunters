@@ -20,10 +20,10 @@ class JobApplication(models.Model):
     status = models.CharField(max_length=255)
     full_name = models.CharField(max_length=255)
     street_name = models.CharField(max_length=255)
-    house number = models.CharField(max_length=255)
+    house_number = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
-    postal-code = models.CharField(max_length=255)
+    postal_code = models.CharField(max_length=255)
 
     job_listing = models.ForeignKey(JobListing, on_delete=models.CASCADE, blank=False)
     job_seeker = models.ForeignKey(JobSeeker, on_delete=models.CASCADE, blank=False)
