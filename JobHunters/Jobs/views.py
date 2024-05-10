@@ -16,3 +16,6 @@ def faq(request):
 
 def jobTips(request):
     return render(request, 'Jobs/job_tips.html')
+
+def employers(request):
+    return render(request, 'Jobs/employers.html')
