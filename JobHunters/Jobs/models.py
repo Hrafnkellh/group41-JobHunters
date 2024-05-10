@@ -43,8 +43,8 @@ class Interview(models.Model):
 class Experience(models.Model):
     place_of_work = models.CharField(max_length=255)
     role = models.CharField(max_length=255)
-    start_date = models.models.DateTimeField()
-    end_date = models.models.DateTimeField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
 
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE, blank=False)
 
