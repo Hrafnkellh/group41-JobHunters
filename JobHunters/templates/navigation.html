@@ -2,9 +2,9 @@
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
       <div class="col-md-3 mb-2 mb-md-0">
         <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-            <strong>JobHunters</strong>
-            <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+            <svg viewBox="0 0 24 24">
+                <img src="pics/logo.png" alt="Logo" class="logo-svg">
+            </svg>
         </a>
       </div>
       <!--<li><a href="{% url 'frontpage' %}"><button type="button" class="nav-link px-2">home</button></a></li>        ----- if we want to remember (not the best way I think) how we have underscore.-->
@@ -43,3 +43,18 @@
     
     </header>
 </div>
+
+<style>
+    .logo-svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    @media (min-width: 768px) {
+        .logo-svg {
+            width: 60px;
+            height: 60px;
+        }
+    }
+</style>
+
