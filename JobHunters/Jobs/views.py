@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
-from JobHunters.Jobs.forms.contact_information_form import ContactInformationForm
-from JobHunters.Jobs.forms.cover_letter_form import CoverLetterForm
-from JobHunters.Jobs.forms.experiences_form import ExperiencesForm
-from JobHunters.Jobs.forms.recommendations_form import RecommendationsForm
+from Jobs.forms.contact_information_form import ContactInformationForm
+from Jobs.forms.cover_letter_form import CoverLetterForm
+from Jobs.forms.experiences_form import ExperiencesForm
+from Jobs.forms.recommendations_form import RecommendationsForm
 
 # Create your views here.
 def index(request):
