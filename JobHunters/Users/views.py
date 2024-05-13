@@ -25,14 +25,14 @@ def register(request):
 
 @login_required
 def profile(request):
-    existing_profile = Profile.objects.filter(user=request.user).first()
+    profile = Profile.objects.filter(user=request.user.id).first()
     if request.method == 'POST':
-        form = ProfileForm(instance=existing_profile, data=request.POST)
+        form = ProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
-            update_profile = form.save(commit=False)
-            update_profile.user = request.user
-            update_profile.save()
+            profile = form.save(commit=False)
+            profile.user = request.user.id
+            profile.save()
             return redirect('profile')
     return render(request, 'Users/profile.html', {
-        'form': ProfileForm(instance=existing_profile)
+        'form': ProfileForm(instance=profile)
     })
