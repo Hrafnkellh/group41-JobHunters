@@ -1,6 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 
+from JobHunters.Users.models import Employer
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
@@ -24,6 +25,11 @@ def jobTips(request):
 
 def employers(request):
     return render(request, 'Jobs/employers.html')
+
+def job_details(request, id):
+    return render(request, 'Jobs/job_details_site.html', context={
+        get_object_or_404(Employer(), pk=id)
+    })
 
 def job_application_page1_contact(request):
     if request.method == 'POST':
