@@ -3,6 +3,6 @@ from django import forms
 from Users.models import User
 
 
-class UserInfoForm(forms.Form):
-    name = forms.CharField()
-    email = forms.EmailField()
+class UserLogInForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Name', 'style': 'width: 300px;'}))
+    password = forms.PasswordInput()
