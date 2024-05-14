@@ -1,10 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% load static %}
     <h2>Your Profile</h2>
     <br>
     <div>
-        <p>  <img src="{{ jobseeker.profile_image_path}}" alt="profile image" class="profile-image" height="100"></p>
-        <p><b>Current user:</b> {{ user }}</p>
+            <p><b>Current user:</b> {{ user }}</p>
+        <p><b>User Profile picture:</b><br>
+            <img src="{% if jobseeker.profile_image_path %}{{ jobseeker.profile_image_path }}{% else %}{% static 'images/defaultpfp.png' %}{% endif %}"
+                 style="
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;">
+            </a>
+        </p>
+
         <p><b>name:</b> {{ jobseeker.name }}</p>
         <p><b>Email:</b> {{ jobseeker.email }}</p>
         <p><b>Address:</b> {{ jobseeker.address }}</p>
