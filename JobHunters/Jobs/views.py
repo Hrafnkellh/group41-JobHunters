@@ -50,7 +50,7 @@ def jobApplicationPage1Contact(request,id):
     return render(request, 'Jobs/job_application_page1_contact.html', {
         'form': ContactInformationForm(),
         'form1': RecommendationsForm(),
-        'form2' : ExperiencesForm()
+        'form2': ExperiencesForm()
     })
 
 def jobApplicationPage2Cover(request,id):
@@ -61,5 +61,10 @@ def jobApplicationPage2Cover(request,id):
             return redirect('index')
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page2_cover.html', {
-        'form': ContactInformationForm()
+        'form3': CoverLetterForm()
+    })
+
+def jobApplicatonPage3(request, id):
+    return render(request, 'Jobs/job_application_page3expRec.hmtl', context={
+        'job_listing': get_object_or_404(JobListing, pk=id)
     })
