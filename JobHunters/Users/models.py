@@ -3,29 +3,28 @@ from django.db import models
 
 # Create your models here.
 
-class User(models.Model):
-    name = models.CharField(max_length = 255)
-    email = models.EmailField(max_length = 255)
-    def __str__(self):
-        return self.name
 
 class JobSeeker(models.Model):
+    name = models.CharField(max_length = 255, blank= True)
+    email = models.EmailField(max_length = 255, blank= True)
     resume = models.CharField(max_length = 255, blank = True)
     profile_image_path = models.CharField(max_length=255, blank = True)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False,  default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 class Employer(models.Model):
+    name = models.CharField(max_length = 255, blank= True)
+    email = models.EmailField(max_length = 255, blank = True)
     esg_rating = models.IntegerField(null=True)
     address = models.CharField(max_length=255)
     logo_path = models.CharField(max_length = 255, blank = True)
     cover_image_path = models.CharField(max_length = 255, blank = True)
     description = models.CharField(max_length = 255, blank = True)
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False,  default=0)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
