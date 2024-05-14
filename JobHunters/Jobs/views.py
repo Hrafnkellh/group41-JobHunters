@@ -1,6 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse
-
 from Users.models import Employer
 from django.contrib.auth.decorators import login_required
 from Jobs.models import JobListing

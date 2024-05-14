@@ -38,6 +38,6 @@ def profile(request):
 
 
 def employersDetails(request, id):
-    return render(request, 'Users.employer_details_site.html', context={
+    return render(request, 'users/employer_details_site.html', context={
         'employer': get_object_or_404(Employer, pk=id)
     })

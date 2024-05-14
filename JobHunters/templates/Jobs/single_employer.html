@@ -1,0 +1,57 @@
+{% load static %}
+
+<div class="col-lg-4 col-md-6">
+    <div class="list-grid-item mt-4">
+        <div class="grid-item-content p-2">
+            <div class="employers-list-img mt-3">
+                <!--<img src="{% static 'images/amazon.png' %}" alt="" class="img-fluid mx-auto d-block rounded-circle">-->
+            </div>
+            <div class="grid-list-desc text-center mt-4">
+                <h5 class="mb-1">{{ employer.name }}</h5>
+                <p class="text-muted f-14 mb-0">{{ employer.email }}</p>
+                <p class="text-muted f-14 mb-0">
+                    <i class="mdi mdi-map-marker mr-2">
+
+                    </i>{{ employer.address }}
+                </p>
+                <ul class="employers-icons list-inline mb-1">
+                    <li class="list-inline-item">
+                        <a href="#" class="text-warning">
+                            <i class="mdi mdi-star f-19"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-warning">
+                            <i class="mdi mdi-star f-19">
+
+                            </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-warning">
+                            <i class="mdi mdi-star f-19">
+
+                            </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-warning">
+                            <i class="mdi mdi-star f-19">
+
+                            </i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-warning">
+                            <i class="mdi mdi-star f-19">
+
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+                <span class="badge badge-warning text-white">4.9
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
