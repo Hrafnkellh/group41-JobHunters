@@ -28,7 +28,7 @@ def employers(request):
 
 def jobDetails(request, id):
     return render(request, 'Jobs/job_details_site.html', context={
-        get_object_or_404(Employer(), pk=id)
+        get_object_or_404(Employer, pk=id)
     })
 
 def jobApplicationPage1Contact(request):
