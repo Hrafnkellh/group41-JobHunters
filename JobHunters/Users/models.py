@@ -9,7 +9,7 @@ class JobSeeker(models.Model):
     email = models.EmailField(max_length = 255, blank= True)
     resume = models.CharField(max_length = 255, blank = True)
     profile_image_path = models.CharField(max_length=255, blank = True)
-
+    address = models.CharField(max_length=255, blank = True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):

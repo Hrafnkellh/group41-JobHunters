@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from Users.forms.profile_form import ProfileForm
-from Users.models import Employer, Profile
+from Users.models import Employer, Profile, JobSeeker
+
 
 # Create your views here.
 def index(request):
@@ -23,18 +24,17 @@ def register(request):
 
 @login_required
 def profile(request):
-    user = request.user
+    profile = request.user
+    jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=user)
+        form = ProfileForm(instance=jobseeker, data=request.POST)
         if form.is_valid():
-            profile = form.save(commit=False)
-            profile.user = request.user
-            user.save()
-            return redirect('profile')  # Adjust to your profile URL name
-    else:
-        form = ProfileForm(instance=user)
+            jobseeker = form.save(commit=True)
+            jobseeker.user = request.user
+            jobseeker.save()
+            return redirect('profile')
+    return render(request, 'Users/profile.html', {'form': ProfileForm(instance=jobseeker),'user': request.user, 'jobseeker': jobseeker})
 
-    return render(request, 'Users/profile.html', {'form': form})
 
 def employersDetails(request, id):
     return render(request, 'Users.employer_details_site.html', context={
