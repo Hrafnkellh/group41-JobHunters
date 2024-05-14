@@ -9,5 +9,6 @@ urlpatterns = [
     path('employers', views.employers, name='employers'),
     path(route='<int:id>', view=views.jobDetails, name='jobDetails'),
     path(route='<int:id>/jobApplication', view=views.jobApplicationPage1Contact, name='jobApplication'),
-    path(route='<int:id>/jobApplication2', view=views.jobApplicationPage2Cover, name='jAP2')
+    path(route='<int:id>/jobApplication2', view=views.jobApplicationPage2Cover,  name='jAP2')
+
 ]
