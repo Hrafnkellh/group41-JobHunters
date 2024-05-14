@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
 from Jobs.models import JobListing
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
@@ -33,6 +33,9 @@ def jobDetails(request, id):
         'job_listing': get_object_or_404(JobListing, pk=id)
     })
 
+
+@login_required
+
 def jobApplicationPage1Contact(request,id):
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
@@ -50,20 +53,13 @@ def jobApplicationPage1Contact(request,id):
         'form2' : ExperiencesForm()
     })
 
-def jobApplicationPage2Cover(request, id):
+def jobApplicationPage2Cover(request,id):
     if request.method == 'POST':
-        form = CoverLetterForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return
+        form3 = CoverLetterForm(data=request.POST)
+        if form3.is_valid():
+            form3.save()
+            return redirect('index')
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page2_cover.html', {
         'form': ContactInformationForm()
     })
-"""
-def jobApplicationPage3ExpRec(request):
-            return
-            #return redirect('log_in')
-    return render(request, 'Jobs/job_application_page3_expRec.html', {
-        'form1': RecommendationsForm(), 'form2' : ExperiencesForm()
-    })"""
