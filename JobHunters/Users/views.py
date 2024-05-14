@@ -18,7 +18,8 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            JobSeeker.objects.create(user=new_user)
             return redirect('log_in')
     return render(request, 'Users/sign_up.html', {'form': UserCreationForm()})
 
