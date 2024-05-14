@@ -19,20 +19,19 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('log_in')
-    return render(request, 'Users/sign_up.html', {
-        'form': UserCreationForm()
-    })
+    return render(request, 'Users/sign_up.html', {'form': UserCreationForm()})
 
 @login_required
-def profile(request):
-    profile = Profile.objects.filter(user=request.user.id).first()
+def profile_view(request):
+    user = request.user
     if request.method == 'POST':
-        form = ProfileForm(instance=profile, data=request.POST)
+        form = ProfileForm(request.POST, instance=user)
         if form.is_valid():
             profile = form.save(commit=False)
-            profile.user = request.user.id
-            profile.save()
-            return redirect('profile')
-    return render(request, 'Users/profile.html', {
-        'form': ProfileForm(instance=profile)
-    })
+            profile.user = request.user
+            user.save()
+            return redirect('profile')  # Adjust to your profile URL name
+    else:
+        form = ProfileForm(instance=user)
+
+    return render(request, 'Users/profile.html', {'form': form})

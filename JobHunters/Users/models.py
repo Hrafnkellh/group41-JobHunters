@@ -6,7 +6,6 @@ from django.db import models
 class User(models.Model):
     name = models.CharField(max_length = 255)
     email = models.EmailField(max_length = 255)
-
     def __str__(self):
         return self.name
 
@@ -33,8 +32,11 @@ class Employer(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image_path = models.CharField(max_length=9999, blank = True)
-
+    name = models.CharField(max_length=255, blank=True)
+    profile_image_path = models.CharField(max_length=255, blank=True)
+    address = models.CharField(max_length=255, blank=True)
+    def __str__(self):
+        return self.user
 """
 employer = Employer.objects.create(
     esg_rating=80,
