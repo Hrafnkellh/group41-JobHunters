@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from Jobs.models import JobListing
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
 
@@ -39,5 +40,5 @@ def profile(request):
 
 def employerDetails(request, id):
     return render(request, 'users/employer_details_site.html', context={
-        'employer': get_object_or_404(Employer, pk=id)
+        'employer': get_object_or_404(Employer, pk=id), 'job_listings': JobListing.objects.filter(employer_id = id)
     })

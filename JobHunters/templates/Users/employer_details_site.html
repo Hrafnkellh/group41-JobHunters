@@ -4,9 +4,7 @@
 <form method="GET">
     {% csrf_token %}
     
-
-    <div style="text-align: center; background-color: #f8f9fa; border-radius: 10px; padding: 20px;">
-
+    <div style="text-align: center; background-color: #f8f9fa; border-radius: 10px; padding: 20px; margin-bottom: 20px">
         <img src="{{ employer.logo_path }}" alt="" class="img-fluid mx-auto d-block rounded-circle" style="
         float: top;
         width:  150px;
@@ -18,8 +16,13 @@
         <p style="font-style: italic; color: #888;">Address: {{ employer.address }}</p>
         <p style="color: #333;">Description: {{ employer.description }}</p>
     </div>
-    
-   
+    <div class="container">
+        <div class="row">
+            {% for job_listing in job_listings %}
+                {% include 'Jobs/single_job.html' with job_listing=job_listing %}
+            {% endfor %}
+        </div>
+    </div>
 </form>
 
 {% endblock %}
