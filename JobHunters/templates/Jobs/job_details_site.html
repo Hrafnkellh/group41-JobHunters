@@ -10,7 +10,7 @@
         <p style="font-weight: bold; color: #007bff;">Salary: {{ job_listing.salary }}</p>
         <p style="font-style: italic; color: #888;">Requirements: {{ job_listing.requirements }}</p>
         <p style="color: #333;">Category: {{ job_listing.category }}</p>
-        <p style="font-weight: bold; color: #333;">Employer: {{ job_listing.employer.name }}</p>
+        <a style="font-weight: bold; color: #333;" href="{% url 'employer_details' id=job_listing.employer.id %}">Employer: {{ job_listing.employer.name }}</a>
     </div>
     
    
