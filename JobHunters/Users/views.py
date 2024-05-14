@@ -37,7 +37,7 @@ def profile(request):
     return render(request, 'Users/profile.html', {'form': ProfileForm(instance=jobseeker),'user': request.user, 'jobseeker': jobseeker})
 
 
-def employersDetails(request, id):
-    return render(request, 'Users.employer_details_site.html', context={
+def employerDetails(request, id):
+    return render(request, 'users/employer_details_site.html', context={
         'employer': get_object_or_404(Employer, pk=id)
     })

@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.http import HttpResponse
+from Users.models import Employer
 from django.contrib.auth.decorators import login_required
 from Jobs.models import JobListing
 from Jobs.forms.contact_information_form import ContactInformationForm
@@ -26,7 +26,9 @@ def jobTips(request):
     return render(request, 'Jobs/job_tips.html')
 
 def employers(request):
-    return render(request, 'Jobs/employers.html')
+    return render(request, 'Jobs/employers.html', context={
+        'employers': Employer.objects.all()
+    })
 
 def jobDetails(request, id):
     return render(request, 'Jobs/job_details_site.html', context={

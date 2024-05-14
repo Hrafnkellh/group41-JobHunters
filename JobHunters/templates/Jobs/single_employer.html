@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="col-lg-4 col-md-6">
+    <div class="list-grid-item mt-4">
+        <div class="grid-item-content p-2">
+            <div class="employers-list-img mt-3">
+                <img src="{{ employer.logo_path }}" alt="" class="img-fluid mx-auto d-block rounded-circle" style="
+                    float: top;
+                    width:  150px;
+                    height: 150px;
+                    object-fit: contain;">
+            </div>
+            <div class="grid-list-desc text-center mt-4">
+                <h5 class="mb-1">{{ employer.name }}</h5>
+                <p class="text-muted f-14 mb-0">{{ employer.email }}</p>
+                <p class="text-muted f-14 mb-0">
+                    <i class="mdi mdi-map-marker mr-2"></i>{{ employer.address }}
+                </p>
+                <span class="badge badge-warning text-white">4.9
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'employer_details' id=employer.id %}">View</a>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
