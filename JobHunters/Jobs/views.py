@@ -12,7 +12,9 @@ def index(request):
     return render(request, 'Jobs/index.html' )
 
 def frontpage(request):
-    return render(request, 'Jobs/frontpage.html')
+    return render(request, 'Jobs/frontpage.html', context= {
+        'job_listings': JobListing.objects.all()
+    })
 
 def aboutUs(request):
     return render(request, 'Jobs/about_us.html')
