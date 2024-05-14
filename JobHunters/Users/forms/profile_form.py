@@ -1,9 +1,9 @@
 from django.forms import ModelForm, widgets
-from Users.models import Profile
+from Users.models import JobSeeker
 
 class ProfileForm(ModelForm):
     class Meta:
-        model = Profile
+        model = JobSeeker
         exclude = ['id', 'user_id', 'resume', 'user']
         widgets = {
             'name': widgets.TextInput(attrs={'class': 'form-control'}),
