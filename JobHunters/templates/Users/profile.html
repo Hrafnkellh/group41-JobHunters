@@ -1,27 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="POST">
-    {% csrf_token %}
-        <h2>
-          Your profile picture
-        </h2>
-        <img id="profile-pic" alt="Profile picture" />
-        <input type="file" id="profile-pic" />
-        <br>
-
-        
-        <div class="form-floating">
-          <li>
-              <label for="text">First name</label>
-              <input type="text" class="form-control" id="first_name">
-          </li>
-            
-          <li>
-            <label for="text">Last name</label>
-            <input type="text" class="form-control" id="last_name">
-          </li>
-        </div>
-        
-        <input type="submit" class="btn btn-primary" value="Update">
-    </form>
+    <h2>Your Profile</h2>
+    <br>
+    <div>
+        <p><b>Current user:</b> {{ Profile }}</p>
+        <p><b>Name:</b> {{ Profile.name }}</p>
+        <p><b>Address:</b> {{ Profile.user }}</p>
+    </div>
+    <hr>
+    <div>
+        <h3>Edit Your Profile</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Update">
+        </form>
+    </div>
 {% endblock %}

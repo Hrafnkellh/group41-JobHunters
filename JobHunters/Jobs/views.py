@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 
-from Users.models import Employer
+from Jobs.models import JobListing
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
@@ -28,7 +28,7 @@ def employers(request):
 
 def jobDetails(request, id):
     return render(request, 'Jobs/job_details_site.html', context={
-        get_object_or_404(Employer, pk=id)
+        'job_listing': get_object_or_404(JobListing, pk=id)
     })
 
 def jobApplicationPage1Contact(request):
