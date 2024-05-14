@@ -33,18 +33,24 @@ def jobDetails(request, id):
         'job_listing': get_object_or_404(JobListing, pk=id)
     })
 
-def jobApplicationPage1Contact(request):
+def jobApplicationPage1Contact(request,id):
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
-        if form.is_valid():
+        form1 = RecommendationsForm(data=request.POST)
+        form2 = ExperiencesForm(data=request.POST)
+        if form.is_valid() and form1.is_valid() and form2.is_valid():
             form.save()
-            return
+            form1.save()
+            form2.save()
+            return redirect('jAP2')
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page1_contact.html', {
-        'form': ContactInformationForm()
+        'form': ContactInformationForm(),
+        'form1': RecommendationsForm(),
+        'form2' : ExperiencesForm()
     })
 
-def jobApplicationPage2Cover(request):
+def jobApplicationPage2Cover(request, id):
     if request.method == 'POST':
         form = CoverLetterForm(data=request.POST)
         if form.is_valid():
@@ -54,16 +60,10 @@ def jobApplicationPage2Cover(request):
     return render(request, 'Jobs/job_application_page2_cover.html', {
         'form': ContactInformationForm()
     })
-
+"""
 def jobApplicationPage3ExpRec(request):
-    if request.method == 'POST':
-        form1 = RecommendationsForm(data=request.POST)
-        form2 = ExperiencesForm(data=request.POST)
-        if form1.is_valid() and form2.is_valid():
-            form1.save()
-            form2.save()
             return
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page3_expRec.html', {
         'form1': RecommendationsForm(), 'form2' : ExperiencesForm()
-    })
+    })"""
