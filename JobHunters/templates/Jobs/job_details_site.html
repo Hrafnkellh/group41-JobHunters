@@ -2,18 +2,25 @@
 {% block content %}
 
 <form method="GET">
-    {% csrf_token %}
-    
+    {% csrf_token %}  
     <div style="text-align: center; background-color: #f8f9fa; border-radius: 10px; padding: 20px;">
         <h1 style="font-family: 'Times New Roman', Times, serif; color: #333;">{{ job_listing.title }}</h1>
         <p style="font-size: 18px; color: #555;">Description: {{ job_listing.description }}</p>
         <p style="font-weight: bold; color: #007bff;">Salary: {{ job_listing.salary }}</p>
+        <p style="color: #333;">Hours: {{ job_listing.time_type }}</p>
         <p style="font-style: italic; color: #888;">Requirements: {{ job_listing.requirements }}</p>
         <p style="color: #333;">Category: {{ job_listing.category }}</p>
-        <a style="font-weight: bold; color: #333;" href="{% url 'employer_details' id=job_listing.employer.id %}">Employer: {{ job_listing.employer.name }}</a>
+        <p style="font-weight: bold; color: #333;" href="{% url 'employer_details' id=job_listing.employer.id %}">Employer: {{ job_listing.employer.name }}</p>
+        <p style="color: #333;">{{ job_listing.employer.address }}</p>
+        <p style="font-family: 'Times New Roman', Times, serif; color: #333;">Application Due Date: {{ job_listing.due_date }}</p>
+        <p style="font-family: 'Times New Roman', Times, serif; color: #333;">Start Date: {{ job_listing.starting_date }}</p>
+        <div class="d-grid gap-2">
+            <div class="d-grid gap-2">
+                <a class="btn btn-outline-secondary" type="button" href="{% url 'employer_details' id=job_listing.employer.id %}">Go to {{job_listing.employer.name}}'s page</a>
+                <button class="btn btn-primary" type="button">Apply</button>
+            </div>
+        </div>
     </div>
-    
-   
 </form>
 
 {% endblock %}

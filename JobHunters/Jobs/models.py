@@ -8,6 +8,9 @@ class JobListing(models.Model):
     salary = models.CharField(max_length=255, default="undef")
     requirements = models.CharField(max_length=255, default="undef")
     category = models.CharField(max_length=255, default="undef")
+    time_type = models.CharField(max_length=255, blank=True, default="undef")
+    due_date = models.DateField(blank=True, null=True)
+    starting_date = models.DateField(blank=True, null=True)
 
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, blank=False,  default=0)
 
