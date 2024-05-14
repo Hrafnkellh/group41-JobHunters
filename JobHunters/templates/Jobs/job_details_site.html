@@ -1,14 +1,13 @@
-from Users.models import Employer
 {% extends 'base.html' %}
 {% block content %}
 
-<h1 class="h3 mb-3 fw-normal">Here we have a company detail site: </h1>
+<h1 class="h3 mb-3 fw-normal">Here we have the job detail site</h1>
 <form method="GET">
     {% csrf_token %}
     
     <div class="form-floating">
-        {% from Users.models import Employer %}
-            {%if Employer.id  = id%}
+        <h1>{{ job_listing.title }}</h1>
+        <p>{{ job_listing.description }}</p>
     </div>
    
 </form>

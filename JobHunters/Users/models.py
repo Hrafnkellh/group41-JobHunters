@@ -10,19 +10,24 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
-class JobSeeker(User):
+class JobSeeker(models.Model):
     resume = models.CharField(max_length = 255, blank = True)
     profile_image_path = models.CharField(max_length=255, blank = True)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False,  default=0)
 
     def __str__(self):
         return self.name
 
-class Employer(User):
+class Employer(models.Model):
     esg_rating = models.IntegerField(null=True)
     address = models.CharField(max_length=255)
     logo_path = models.CharField(max_length = 255, blank = True)
     cover_image_path = models.CharField(max_length = 255, blank = True)
     description = models.CharField(max_length = 255, blank = True)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False,  default=0)
+
     def __str__(self):
         return self.name
 
