@@ -1,6 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 
+from Users.models import Employer
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
@@ -25,7 +26,12 @@ def jobTips(request):
 def employers(request):
     return render(request, 'Jobs/employers.html')
 
-def job_application_page1_contact(request):
+def jobDetails(request, id):
+    return render(request, 'Jobs/job_details_site.html', context={
+        get_object_or_404(Employer(), pk=id)
+    })
+
+def jobApplicationPage1Contact(request):
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
         if form.is_valid():
@@ -36,7 +42,7 @@ def job_application_page1_contact(request):
         'form': ContactInformationForm()
     })
 
-def job_application_page2_cover(request):
+def jobApplicationPage2Cover(request):
     if request.method == 'POST':
         form = CoverLetterForm(data=request.POST)
         if form.is_valid():
@@ -47,7 +53,7 @@ def job_application_page2_cover(request):
         'form': ContactInformationForm()
     })
 
-def job_application_page3_exprec(request):
+def jobApplicationPage3ExpRec(request):
     if request.method == 'POST':
         form1 = RecommendationsForm(data=request.POST)
         form2 = ExperiencesForm(data=request.POST)

@@ -29,3 +29,12 @@ class Employer(User):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_image_path = models.CharField(max_length=9999, blank = True)
+
+"""
+employer = Employer.objects.create(
+    esg_rating=80,
+    address="Grensásvegur 12",
+    logo_path="pics/advaniaLogo.png",
+    cover_image_path="pics/advaniaCoverImage.png",
+    description="We are a tech company looking to hire the finest of people on this mother earth. Thank you."
+)""" 
