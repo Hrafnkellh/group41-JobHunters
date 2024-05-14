@@ -5,9 +5,12 @@
 <form method="GET">
     {% csrf_token %}
     
-    <div class="form-floating">
+    <div style="align-content: center;">
         <h1>{{ job_listing.title }}</h1>
         <p>{{ job_listing.description }}</p>
+        <p>Salary: {{ job_listing.salary }}</p>
+        <p>{{ job_listing.requirements }}</p>
+        <p>{{ job_listing.category }}</p>
     </div>
    
 </form>
