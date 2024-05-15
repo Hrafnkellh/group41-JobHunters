@@ -1,6 +1,6 @@
 <div class="col-md-4 ">
-    <div class="card mb-4 box-shadow" style="height: 230px;">
-      <img class="card-img-top" src="{{ job_listing.employer.logo_path }}" alt="" style="height: 25px; width: 25%; display: block;">
+    <div class="card mb-4 box-shadow" style="height: 340px;">
+      <img class="card-img-top" src="{{ job_listing.employer.logo_path }}" alt="" style="height: 50px; max-width: 25%;display: block;margin-left: auto;margin-right: auto;border: 1px solid black;margin-top: 20px;border-radius: 10%;padding: 4px">
       <div class="card-body" style="position: relative;">
         <h1 class="card-text">{{ job_listing.title }}</h1>
         <p class="card-text">{{ job_listing.description|truncatechars:200 }}</p>
