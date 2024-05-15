@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from Jobs.models import JobApplication, JobListing
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
+from Users.forms.UserCreationForm import CreationForm
+
 
 
 # Create your views here.
@@ -17,12 +19,12 @@ def logIn(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = CreationForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
             JobSeeker.objects.create(user=new_user)
             return redirect('log_in')
-    return render(request, 'Users/sign_up.html', {'form': UserCreationForm()})
+    return render(request, 'Users/sign_up.html', {'form': CreationForm()})
 
 @login_required
 def profile(request):
