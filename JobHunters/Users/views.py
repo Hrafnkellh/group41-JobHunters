@@ -1,12 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
+from pyexpat.errors import messages
+
 from Jobs.models import JobApplication, JobListing
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
 from Users.forms.UserCreationForm import CreationForm
+from Users.forms.Sign_in_form import log_in_form
+
 
 
 
@@ -14,8 +18,17 @@ from Users.forms.UserCreationForm import CreationForm
 def index(request):
     return render(request, 'Users/index.html' )
 
-def logIn(request):
-    return render(request, 'Users/log_in.html' )
+def login_page(request):
+    if request.method == 'POST':
+        form = log_in_form(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('profile')
+    return render(request, 'Users/log_in.html', {'form': log_in_form()})
 
 def register(request):
     if request.method == 'POST':

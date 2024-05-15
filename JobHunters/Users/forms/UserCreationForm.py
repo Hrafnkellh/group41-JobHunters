@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 class CreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         for fieldname in ['username', 'password1', 'password2',]:
             self.fields[fieldname].help_text = None
 
@@ -17,6 +16,7 @@ class CreationForm(UserCreationForm):
             'placeholder':'Username',
             'maxlength':'16',
             'minlength':'4',
+            'style': 'width: 300px;'
         })
         self.fields['password1'].widget.attrs.update({
             'required': '',
@@ -27,6 +27,7 @@ class CreationForm(UserCreationForm):
             'placeholder': 'password',
             'maxlength': '22',
             'minlength': '8',
+            'style': 'width: 300px;'
         })
         self.fields['password2'].widget.attrs.update({
                 'required': '',
@@ -37,7 +38,10 @@ class CreationForm(UserCreationForm):
                 'placeholder': 'password',
                 'maxlength': '22',
                 'minlength': '8',
+                'style': 'width: 300px;'
         })
+
+
     class Meta:
         model = User
         fields = 'username', 'password1', 'password2'
