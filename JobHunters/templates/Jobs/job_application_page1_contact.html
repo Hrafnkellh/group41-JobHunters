@@ -25,6 +25,6 @@
     <div class="form-floating">
         {{ form2 }}
     </div>
-    <input type="submit" class="btn btn-primary" value="next">
+    <a class="btn btn-primary"  type="button" href="{% url 'jobApplicationn' id=job_listing.employer.id %}" >next</a>
 </form>
 {% endblock %}
