@@ -11,5 +11,4 @@ urlpatterns = [
     path(route='<int:id>/jobApplication/', view=views.jobApplicationPage1Contact, name='jobApplication'),
     path(route='<int:id>/jobApplicationn/', view=views.jobApplicationPage2Cover,  name='jobApplicationn'),
     path(route='<int:id>/jobApplication3/', view=views.jobApplicatonPage3,  name='jobApplication3')
-
 ]

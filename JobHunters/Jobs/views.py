@@ -13,9 +13,18 @@ def index(request):
     return render(request, 'Jobs/index.html' )
 
 def frontpage(request):
-    return render(request, 'Jobs/frontpage.html', context= {
-        'job_listings': JobListing.objects.all()
-    })
+    filter_by = request.GET.get('filter', None)
+
+    if filter_by == 'title':
+        job_listings = JobListing.objects.all().order_by('title')
+    elif filter_by == 'employer':
+        job_listings = JobListing.objects.all().order_by('employer__name')
+    elif filter_by == 'salary':
+        job_listings = JobListing.objects.all().order_by('-salary')
+    else:
+        job_listings = JobListing.objects.all()
+
+    return render(request, 'Jobs/frontpage.html', context={ 'job_listings': job_listings})
 
 def aboutUs(request):
     return render(request, 'Jobs/about_us.html')
@@ -35,7 +44,6 @@ def jobDetails(request, id):
     return render(request, 'Jobs/job_details_site.html', context={
         'job_listing': get_object_or_404(JobListing, pk=id)
     })
-
 
 @login_required
 
