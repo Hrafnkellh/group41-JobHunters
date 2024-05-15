@@ -2,6 +2,14 @@
 {% block content %}
     <section class="jumbotron text-center">
       </section>
+      <div class="col-md-3 mb-4 ms-auto">
+        <label for="filter-dropdown" class="form-label">Sort by:</label>
+        <select name="filter-dropdown" class="form-select" id="filter-dropdown">
+            <option value="">Choose...</option>
+            <option value="1">Name</option>
+            <option value="2">Price</option>
+        </select>
+    </div>
     <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
