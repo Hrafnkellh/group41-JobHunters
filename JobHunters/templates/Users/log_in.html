@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
   <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  <form method="POST">
+  <form class="form form-horizontal" method="POST" style="text-align: left; background-color: #f8f9fa; border-radius: 10px; padding: 20px; display: block; margin-left: auto;margin-right: auto; ">
       {% csrf_token %}
-      <div class="form-floating">
+      <div class="form-group">
           {{ form }}
+          
+          </div>
+      <hr>
+      <div class="form-group">
+          <input type="submit" class="btn btn-outline-primary me-2" value="Log In"/>
+              <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Don't have an account? Sign up!</button></a>
+
       </div>
-    <input type="submit" class="btn btn-outline-primary me-2" value="Log_In"/>
-    <a href="{% url 'register' %}"><button type="button" class="btn btn-outline-primary me-2">Don't have an account? Sign up!</button></a>
-    
   </form>
 {% endblock %}
