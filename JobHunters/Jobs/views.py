@@ -47,7 +47,7 @@ def jobApplicationPage1Contact(request,id):
             form.save()
             form1.save()
             form2.save()
-            return redirect('jAP2')
+            return render('jobApplicationn')
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page1_contact.html', {
         'form': ContactInformationForm(),
@@ -60,7 +60,7 @@ def jobApplicationPage2Cover(request,id):
         form3 = CoverLetterForm(data=request.POST)
         if form3.is_valid():
             form3.save()
-            return redirect('index')
+            return redirect('jobApplication3')
             #return redirect('log_in')
     return render(request, 'Jobs/job_application_page2_cover.html', {
         'form3': CoverLetterForm()
