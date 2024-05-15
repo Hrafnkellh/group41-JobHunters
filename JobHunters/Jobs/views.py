@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from Users.models import Employer
 from django.contrib.auth.decorators import login_required
 from Jobs.models import JobListing
@@ -49,10 +50,12 @@ def jobApplicationPage1Contact(request,id):
             form2.save()
             return render('jobApplicationn')
             #return redirect('log_in')
+    url = reverse('jobApplicationn', kwargs={'id': id})
     return render(request, 'Jobs/job_application_page1_contact.html', {
         'form': ContactInformationForm(),
         'form1': RecommendationsForm(),
-        'form2': ExperiencesForm()
+        'form2': ExperiencesForm(),
+        'my_url': url
     })
 
 def jobApplicationPage2Cover(request,id):
