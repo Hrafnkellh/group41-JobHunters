@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from Jobs.models import JobListing
+from Jobs.models import JobApplication, JobListing
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
 
@@ -35,7 +35,9 @@ def profile(request):
             jobseeker.user = request.user
             jobseeker.save()
             return redirect('profile')
-    return render(request, 'Users/profile.html', {'form': ProfileForm(instance=jobseeker),'user': request.user, 'jobseeker': jobseeker})
+    return render(request, 'Users/profile.html', {
+        'form': ProfileForm(instance=jobseeker),'user': request.user, 'jobseeker': jobseeker, 'applications': JobApplication.objects.filter(job_seeker=jobseeker)
+        })
 
 
 def employerDetails(request, id):
