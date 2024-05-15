@@ -44,3 +44,9 @@ def employerDetails(request, id):
     return render(request, 'users/employer_details_site.html', context={
         'employer': get_object_or_404(Employer, pk=id), 'job_listings': JobListing.objects.filter(employer_id = id)
     })
+
+@login_required
+def applicationDetails(request, id):
+    return render(request, 'Users/application_details_site.html', context={
+        'application': get_object_or_404(JobApplication, job_seeker_id=request.user.id, job_listing_id=id)
+    })
