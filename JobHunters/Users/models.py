@@ -37,11 +37,3 @@ class Profile(models.Model):
     address = models.CharField(max_length=255, blank=True)
     def __str__(self):
         return self.user
-"""
-employer = Employer.objects.create(
-    esg_rating=80,
-    address="Grensásvegur 12",
-    logo_path="pics/advaniaLogo.png",
-    cover_image_path="pics/advaniaCoverImage.png",
-    description="We are a tech company looking to hire the finest of people on this mother earth. Thank you."
-)""" 

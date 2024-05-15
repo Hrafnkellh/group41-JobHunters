@@ -7,6 +7,7 @@ from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
 from Jobs.forms.recommendations_form import RecommendationsForm
+from Users.models import Employer, JobSeeker
 
 # Create your views here.
 def index(request):
@@ -40,6 +41,7 @@ def jobDetails(request, id):
 @login_required
 
 def jobApplicationPage1Contact(request,id):
+    jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
         form1 = RecommendationsForm(data=request.POST)
