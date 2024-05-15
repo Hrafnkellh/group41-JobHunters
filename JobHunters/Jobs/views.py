@@ -73,5 +73,5 @@ def jobApplicationPage2Cover(request,id):
 
 def jobApplicatonPage3(request, id):
     return render(request,'Jobs/job_application_page3_expRec.html', {
-        'job_listing': get_object_or_404(JobListing, pk=id)
+        'JobListing': get_object_or_404(JobListing, pk=id)
     })
