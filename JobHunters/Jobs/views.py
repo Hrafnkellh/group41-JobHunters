@@ -63,13 +63,15 @@ def jobApplicationPage2Cover(request,id):
         form3 = CoverLetterForm(data=request.POST)
         if form3.is_valid():
             form3.save()
-            return redirect('jobApplication3')
+            return render('jobApplication3')
             #return redirect('log_in')
+    url1 = reverse('jobApplication3', kwargs={'id': id})
     return render(request, 'Jobs/job_application_page2_cover.html', {
-        'form3': CoverLetterForm()
+        'form3': CoverLetterForm(),
+        'my_url1': url1
     })
 
 def jobApplicatonPage3(request, id):
-    return render(request, 'Jobs/job_application_page3expRec.hmtl', context={
+    return render(request,'Jobs/job_application_page3_expRec.html', {
         'job_listing': get_object_or_404(JobListing, pk=id)
     })

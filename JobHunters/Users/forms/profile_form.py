@@ -6,8 +6,8 @@ class ProfileForm(ModelForm):
         model = JobSeeker
         exclude = ['id', 'user_id', 'resume', 'user']
         widgets = {
-            'name': widgets.TextInput(attrs={'class': 'form-control'}),
-            'profile_image_path': widgets.TextInput(attrs={'class': 'form-control'}),
-            'address': widgets.TextInput(attrs={'class': 'form-control'}),
-            'email': widgets.TextInput(attrs={'class': 'form-control'}),
+            'name': widgets.TextInput(attrs={'class': 'form-control', 'style': 'width: 300px'}),
+            'profile_image_path': widgets.TextInput(attrs={'class': 'form-control', 'style': 'width: 800px'}),
+            'address': widgets.TextInput(attrs={'class': 'form-control', 'style': 'width: 300px'}),
+            'email': widgets.TextInput(attrs={'class': 'form-control','style': 'width: 300px'}),
         }
