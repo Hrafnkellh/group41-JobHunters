@@ -4,6 +4,11 @@
 <form method="GET">
     {% csrf_token %}  
     <div style="text-align: center; background-color: #f8f9fa; border-radius: 10px; padding: 20px;">
+        <img src="{{ job_listing.employer.logo_path }}" alt="" class="img-fluid mx-auto d-block rounded-circle" style="
+        float: top;
+        width:  150px;
+        height: 150px;
+        object-fit: contain;">
         <h1 style="font-family: 'Times New Roman', Times, serif; color: #333;">{{ job_listing.title }}</h1>
         <p style="font-size: 18px; color: #555;">Description: {{ job_listing.description }}</p>
         <p style="font-weight: bold; color: #007bff;">Salary: {{ job_listing.salary }}</p>
