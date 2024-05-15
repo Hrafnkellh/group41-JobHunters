@@ -3,7 +3,7 @@
     {% load static %}
     <h2>Your Profile</h2>
     <br>
-    <div style="text-align: left; background-color: #f8f9fa; border-radius: 10px; padding: 20px; display: flex; flex-direction: row; align-items: strech;">
+    <div style="text-align: left; background-color: #f8f9fa; border-radius: 10px; padding: 20px; display: flex; flex-direction: row; align-items: stretch;">
         <div style="flex-grow: 2;">
         <p><b>Current user:</b> {{ user }}</p>
         <p><b>name:</b> {{ jobseeker.name }}</p>
@@ -22,14 +22,15 @@
         </p>
     </div> 
     <hr>
-    <div>
-        <h3>Edit Your Profile</h3>
+     <h3>Edit Your Profile</h3>
+    <div style="text-align: left; background-color: #f8f9fa; border-radius: 10px; padding: 20px; display: flex; flex-direction: row; align-items: stretch;">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn btn-primary" value="Update">
         </form>
     </div>
+    <hr>
 
     <h1 style="text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">Job Applications</h1>
     <div class="container">
