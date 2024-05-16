@@ -69,13 +69,14 @@ def jobApplicationPage1Contact(request,id):
     })
 
 def jobApplicationPage2Cover(request,id):
+    sad = get_object_or_404(JobListing, pk = id)
     jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form3 = CoverLetterForm(data=request.POST)
         if form3.is_valid():
             form3.save()
-            JobApplication.job_seeker = jobseeker
-            
+            new_jobApplication = JobApplication.objects.create(job_Seeker=jobseeker, job_listing=sad)
+        
             return render('jobApplication3')
             #return redirect('log_in')
     url1 = reverse('jobApplication3', kwargs={'id': id})
