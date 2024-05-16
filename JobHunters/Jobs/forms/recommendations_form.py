@@ -7,7 +7,7 @@ class RecommendationsForm(forms.Form):
     phone_number = forms.IntegerField()
     role = forms.CharField()
     job_application_id = forms.IntegerField()
-    
+
     may_be_contacted = forms.BooleanField()
     def __init__(self, *args, **kwargs):
         super(RecommendationsForm, self).__init__(*args, **kwargs)
