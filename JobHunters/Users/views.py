@@ -1,18 +1,15 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.http import HttpResponse
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import logout, authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from pyexpat.errors import messages
-
 from Jobs.models import JobApplication, JobListing
+from Users.forms.change_password import change_password_form
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
 from Users.forms.UserCreationForm import CreationForm
 from Users.forms.Sign_in_form import log_in_form
-
-
-
 
 # Create your views here.
 def index(request):
@@ -65,3 +62,16 @@ def applicationDetails(request, id):
     return render(request, 'Users/application_details_site.html', context={
         'application': get_object_or_404(JobApplication, job_seeker_id=request.user.id, job_listing_id=id)
     })
+
+@login_required
+def change_user_password(request):
+    if request.method == 'POST':
+        form = change_password_form(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('profile')
+    else:
+        form = change_password_form(request.user)
+    return render(request, 'Users/change_password.html', {'form': form})
+
