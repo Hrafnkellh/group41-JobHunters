@@ -81,17 +81,19 @@ def jobDetails(request, id):
 @login_required
 
 def jobApplicationPage1Contact(request,id):
-    
+    print(request.method)
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
         form1 = RecommendationsForm(data=request.POST)
         form2 = ExperiencesForm(data=request.POST)
+        print("its a post malone")
         if form.is_valid() and form1.is_valid() and form2.is_valid():
             form.save()
             form1.save()
             form2.save()
             return render('jobApplicationn')
             #return redirect('log_in')
+
     url = reverse('jobApplicationn', kwargs={'id': id})
     return render(request, 'Jobs/job_application_page1_contact.html', {
         'form': ContactInformationForm(),
