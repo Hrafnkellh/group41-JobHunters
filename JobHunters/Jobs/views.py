@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from Users.models import Employer
 from django.contrib.auth.decorators import login_required
-from Jobs.models import JobListing
+from Jobs.models import JobListing, JobApplication, JobSeeker
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
@@ -49,7 +49,7 @@ def jobDetails(request, id):
 @login_required
 
 def jobApplicationPage1Contact(request,id):
-    jobseeker = JobSeeker.objects.filter(user=request.user).first()
+    
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
         form1 = RecommendationsForm(data=request.POST)
@@ -69,10 +69,13 @@ def jobApplicationPage1Contact(request,id):
     })
 
 def jobApplicationPage2Cover(request,id):
+    jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form3 = CoverLetterForm(data=request.POST)
         if form3.is_valid():
             form3.save()
+            JobApplication.job_seeker = jobseeker
+            
             return render('jobApplication3')
             #return redirect('log_in')
     url1 = reverse('jobApplication3', kwargs={'id': id})
