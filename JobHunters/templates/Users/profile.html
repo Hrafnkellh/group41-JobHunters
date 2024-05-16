@@ -27,6 +27,8 @@
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
+            <a class="btn btn-primary" href="{% url 'change_user_password' %}">Change Password</a>
+            <hr>
             <input type="submit" class="btn btn-primary" value="Update">
         </form>
     </div>

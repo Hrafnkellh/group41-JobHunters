@@ -1,15 +1,12 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from Jobs.models import JobListing, Employer, JobSeeker
+from Jobs.models import JobListing, JobApplication, JobSeeker
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
 from Jobs.forms.recommendations_form import RecommendationsForm
-from django.db.models.functions import Trim
-from django.db.models.functions import Cast
 from django.utils.dateparse import parse_date
-from django.db.models import CharField
 
 # Create your views here.
 def index(request):
@@ -84,7 +81,7 @@ def jobDetails(request, id):
 @login_required
 
 def jobApplicationPage1Contact(request,id):
-    jobseeker = JobSeeker.objects.filter(user=request.user).first()
+    
     if request.method == 'POST':
         form = ContactInformationForm(data=request.POST)
         form1 = RecommendationsForm(data=request.POST)
@@ -104,10 +101,14 @@ def jobApplicationPage1Contact(request,id):
     })
 
 def jobApplicationPage2Cover(request,id):
+    sad = get_object_or_404(JobListing, pk = id)
+    jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
         form3 = CoverLetterForm(data=request.POST)
         if form3.is_valid():
             form3.save()
+            new_jobApplication = JobApplication.objects.create(job_Seeker=jobseeker, job_listing=sad)
+        
             return render('jobApplication3')
             #return redirect('log_in')
     url1 = reverse('jobApplication3', kwargs={'id': id})
