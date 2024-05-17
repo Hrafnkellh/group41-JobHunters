@@ -11,38 +11,37 @@ from Users.models import Employer, Profile, JobSeeker
 from Users.forms.UserCreationForm import CreationForm
 from Users.forms.Sign_in_form import log_in_form
 
-# Create your views here.
 def index(request):
     return render(request, 'Users/index.html' )
 
 def login_page(request):
     if request.method == 'POST': #
         form = log_in_form(data=request.POST)
-        if form.is_valid(): #if the form was correctly filled
+        if form.is_valid(): # cehcks if the form was correctly filled
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password) #use built in authentication to validate the input and check if is user
+            user = authenticate(request, username=username, password=password) # use built in authentication to validate the input
             if user is not None: # if user is found
-                login(request, user) #login
-                return redirect('profile') #redirect to profile
+                login(request, user)
+                return redirect('profile')
     return render(request, 'Users/log_in.html', {'form': log_in_form()})
 
 def register(request):
     if request.method == 'POST':
-        form = CreationForm(data=request.POST)  #create user form
+        form = CreationForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
             JobSeeker.objects.create(user=new_user) #creates new user labeled as jobseeker
-            return redirect('log_in') #redirects to log in page
+            return redirect('log_in')
     return render(request, 'Users/sign_up.html', {'form': CreationForm()})
 
-@login_required #makes sure the  user is logged in
+@login_required
 def profile(request):
     jobseeker = JobSeeker.objects.filter(user=request.user).first() #find the user thats logged in
     if request.method == 'POST':
-        form = ProfileForm(instance=jobseeker, data=request.POST) #the edit profile form
+        form = ProfileForm(instance=jobseeker, data=request.POST) #the form for editing the profile
         if form.is_valid():
-            jobseeker = form.save(commit=True) #we had commit false but changed to commit true when fixing a problem and it has been working for us so we didnt change back
+            jobseeker = form.save(commit=True) # we had commit false but changed to commit true when fixing a problem and it has been working for us so we didnt change back
             jobseeker.user = request.user
             jobseeker.save()
             return redirect('profile')
@@ -82,7 +81,7 @@ def delete_application(request, id):
     jobseeker = get_object_or_404(JobSeeker, user=request.user) #get the user we are deleting the application
     application = get_object_or_404(JobApplication, id=id, job_seeker=jobseeker) #get the application from the user
     if request.method == 'POST':
-        application.delete() #delete the application
+        application.delete()
         return redirect('profile')
     else:
         return redirect('profile')

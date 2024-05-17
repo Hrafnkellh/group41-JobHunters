@@ -1,5 +1,15 @@
 # group41-JobHunters
 
+We tested the website on firefox.
+
+You can use it by running the following commands from the root directory of the application (the one this readme is in)
+python -m venv venv
+venv\scripts\activate
+pip install -r requirements.txt
+cd jobhunters
+python manage.py runserver
+
+You can then visit the website at an address displayed in your terminal.
 
 
 We believe we've implemented all the core requirements as described in the assignment description but we made a slight change to the 'job applications page'
