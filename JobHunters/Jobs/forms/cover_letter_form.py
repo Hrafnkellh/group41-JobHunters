@@ -1,7 +1,7 @@
 from django import forms
 
 class CoverLetterForm(forms.Form):
-    text = forms.CharField()
+    text = forms.CharField(required=True)
 
     def __init__(self, *args, **kwargs):
         super(CoverLetterForm, self).__init__(*args, **kwargs)
