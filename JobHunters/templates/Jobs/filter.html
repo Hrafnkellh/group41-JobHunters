@@ -1,42 +1,55 @@
-<form method="GET" action="">
-   <div class="form-group">
-       <label for="starting_date">Starting Date:</label>
-       <input type="date" name="starting_date" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="due_date">Due Date:</label>
-       <input type="date" name="starting_date" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="time_type">Time Type:</label>
-        <select name="time_type" class="form-control">
-            <option value="">Select</option>
-            <option value="full_time">Full-Time</option>
-            <option value="part_time">Part-Time</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="category">Category:</label>
-        <select name="category" class="form-control">
-            <option value="">Select</option>
-            <option value="bachelor">Bachelor</option>
-            <option value="janitorial">Janitorial</option>
-            <option value="science">Science</option>
-            <option value="computer science">Computer Science</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="sort">Sort by:</label>
-        <select name="sort" class="form-control">
-            <option value="">Default</option>
-            <option value="due_date">Due Date</option>
-            <option value="-starting_date">Starting Date Desc</option>
-            <option value="starting_date">Starting Date Asc</option>
-            <option value="-salary">Salary High to Low</option>
-            <option value="salary">Salary Low to High</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </div>
-</form>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <form method="GET" action="">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Filtering and sorting options
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <label for="starting_date">Starting Date:</label>
+                    <input type="date" name="starting_date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="due_date">Due Date:</label>
+                    <input type="date" name="starting_date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="time_type">Time Type:</label>
+                        <select name="time_type" class="form-control">
+                            <option value="">Select</option>
+                            <option value="full_time">Full-Time</option>
+                            <option value="part_time">Part-Time</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select name="category" class="form-control">
+                            <option value="">Select</option>
+                            <option value="bachelor">Bachelor</option>
+                            <option value="janitorial">Janitorial</option>
+                            <option value="science">Science</option>
+                            <option value="computer science">Computer Science</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sort">Sort by:</label>
+                        <select name="sort" class="form-control">
+                            <option value="">Default</option>
+                            <option value="due_date">Due Date</option>
+                            <option value="-starting_date">Starting Date Desc</option>
+                            <option value="starting_date">Starting Date Asc</option>
+                            <option value="-salary">Salary High to Low</option>
+                            <option value="salary">Salary Low to High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Apply filter</button>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+    </form>
+</div>
