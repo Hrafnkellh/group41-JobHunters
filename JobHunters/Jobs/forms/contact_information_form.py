@@ -1,7 +1,10 @@
 from django import forms
+from django_countries.fields import CountryField
+from django_countries.widgets import CountrySelectWidget
 
 class ContactInformationForm(forms.Form):
     full_name = forms.CharField(max_length=100, required=True)
+    country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget())
     street_name = forms.CharField(max_length=120, required=False)
     house_number = forms.CharField(max_length=999, required=False)
     city = forms.CharField(max_length=100, required=False)
@@ -10,6 +13,11 @@ class ContactInformationForm(forms.Form):
         super(ContactInformationForm, self).__init__(*args, **kwargs)
 
         self.fields['full_name'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'full name',
+            'style': 'width: 300px;'
+        })
+        self.fields['country'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'full name',
             'style': 'width: 300px;'

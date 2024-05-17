@@ -122,7 +122,6 @@ def jobApplication(request, id):
     job_listing = get_object_or_404(JobListing, pk=id)
 
     if request.method == 'POST':
-        print("post request worked")
         contact_form = ContactInformationForm(request.POST, prefix='contact')
         cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
         experience_form = ExperiencesForm(request.POST, prefix='exp')
@@ -137,6 +136,7 @@ def jobApplication(request, id):
                 house_number=contact_form.cleaned_data['house_number'],
                 city=contact_form.cleaned_data['city'],
                 postal_code=contact_form.cleaned_data['postal_code'],
+                country=contact_form.cleaned_data['country'],
                 job_seeker_id=request.user.id,
                 job_listing_id=job_listing.id
             )
