@@ -106,7 +106,7 @@ def JAP_1_1(request,id):
         if form.is_valid():
             form.save()
             form = ContactInformationForm(data=request.POST)
-            return render('JobApp_1_2')
+            return render('JobApp_1_2',form)
             #return redirect('log_in')
 
     url = reverse('jobApp_1_2', kwargs={'id': id})
@@ -115,14 +115,14 @@ def JAP_1_1(request,id):
         'my_url': url
     })
 
-def JAP_1_2(request,id):
+def JAP_1_2(request,id,form):
     print(request.method)
     if request.method == 'POST':
         form1 = RecommendationsForm(data=request.POST)
         print("its a post malone")
         if form1.is_valid():
             form1.save()
-            return render('JobApp_1_3')
+            return render('JobApp_1_3',form,form1)
             #return redirect('log_in')
 
     url = reverse('jobApp_1_3', kwargs={'id': id})
@@ -131,7 +131,7 @@ def JAP_1_2(request,id):
         'my_url': url
     })
 
-def JAP_1_3(request,id):
+def JAP_1_3(request,id,form,form1):
     print(request.method)
     if request.method == 'POST':
         form2 = ExperiencesForm(data=request.POST)
