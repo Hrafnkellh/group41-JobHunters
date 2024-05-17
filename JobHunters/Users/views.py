@@ -75,3 +75,12 @@ def change_user_password(request):
         form = change_password_form(request.user)
     return render(request, 'Users/change_password.html', {'form': form})
 
+@login_required
+def delete_application(request, id):
+    jobseeker = get_object_or_404(JobSeeker, user=request.user)
+    application = get_object_or_404(JobApplication, id=id, job_seeker=jobseeker)
+    if request.method == 'POST':
+        application.delete()
+        return redirect('profile')
+    else:
+        return redirect('profile')

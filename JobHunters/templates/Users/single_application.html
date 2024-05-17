@@ -1,8 +1,13 @@
 <div class="col-md-4 ">
-    <div class="card mb-4 box-shadow" style="height: 230px;">
+    <div class="card mb-4 box-shadow" style="height: 270px; width: 300px;">
       <div class="card-body" style="position: relative;">
-        <h1 class="card-text">{{ application.title }}</h1>
-        <p class="card-text">{{ application.status }}</p>
+        <h3 class="card-text">{{ application.job_listing }}</h3>
+        <p class="card-text"><b>Status:</b> {{ application.status }}</p>
+        <p class="card-text"><b>Employer:</b> {{ application.job_listing.employer}}</p>
+        <form action="{% url 'delete_application' application.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete">
+        </form>
         <a class="btn btn-primary" href="{% url 'application_details' id=application.job_listing.id %}" style="position: absolute; right: 0; bottom: 0; width: 100% ; height: 40px; border-radius: 0;">View</a>
       </div>
     </div>
