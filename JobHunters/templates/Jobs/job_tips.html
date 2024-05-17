@@ -2,112 +2,100 @@
 {% block content %}
 <style>
     .article--recommended_wrapper {
-    margin-top: 28px;
-    font-family: var(--font-primary);
-    padding: 2% 40px 0px 40px;
-}
+        margin-top: 28px;
+        font-family: var(--font-primary);
+        padding: 2% 40px 0px 40px;
+    }
     .article--recommended .new-top-bar {
-    line-height: 26px;
-    width: 100%;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    color: var(--black-to-white);
-    padding: 0% 0 0 1%;
-    background-color: var(--gfg-body-color);
-}
-    @media screen and (max-width: 912px) {
-    .article--recommended .new-top-bar {
+        line-height: 26px;
+        width: 100%;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        color: var(--black-to-white);
+        padding: 0% 0 0 1%;
+        background-color: var(--gfg-body-color);
+    }
+    .tip-section {
+        margin-top: 20px;
+    }
+    .tip-title {
+        font-size: 20px;
         font-weight: bold;
-        font-size: 22px;
+        color: var(--primary-color);
     }
-
-    .new-gfg--carousel_wrap {
+    .tip-content {
         font-size: 16px;
+        color: var(--secondary-color);
+        margin-top: 5px;
+    }
+    @media screen and (max-width: 912px) {
+        .article--recommended .new-top-bar {
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .new-gfg--carousel_wrap {
+            font-size: 16px;
+        }
+
+        span.SNoOfRecomArti {
+            font-size: 14px;
+        }
     }
 
-    span.SNoOfRecomArti {
-        font-size: 14px;
-    }
-}
+    @media screen and (max-width: 500px) {  
+        .new-gfg--carousel_wrap {
+            font-size: 14px;
+        }
 
-@media screen and (max-width: 500px) {
-    .new-gfg--carousel_wrap {
-        font-size: 14px;
-    }
+        span.SNoOfRecomArti {
+            font-size: 12px;
+            min-width: 20px !important;
+        }
 
-    span.SNoOfRecomArti {
-        font-size: 12px;
-        min-width: 20px !important;
+        .article--recommended .new-top-bar {
+            font-size: 18px;
+            margin-bottom: 3%;
+        }
     }
-
-    .article--recommended .new-top-bar {
-        font-size: 18px;
-        margin-bottom: 3%;
-    }
-}
 </style>
 
     <div class="article--recommended article--recommended_wrapper" id="similar-reads">
-                                <h3 class="new-top-bar top-bar-title">
-                                    Our top tips for interviews are:
-                                </h3>
-                                <div class="gfg-similar-reads-list">
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/how-to-prepare-job-description-jd-for-the-role-of-a-digital-marketing-profile/">
-            <div title="How to prepare Job Description (JD) for the role of a Digital Marketing profile?" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                How to prepare Job Description (JD) for the role of a Digital Marketing Profile?
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/4-steps-in-the-process-of-posting-a-job/">
-            <div title="4 Steps in the process of Posting a Job" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                4 Steps in the process of Posting a Job
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/5-ways-to-a-successful-job-search/">
-            <div title="5 Ways to a Successful Job Search" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                5 Ways to a Successful Job Search
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/10-best-tips-to-prepare-for-a-job-interview-in-2023/">
-            <div title="10 Best tips to prepare for a Job Interview in 2023" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                10 Best tips to prepare for a Job Interview in 2023
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/how-to-prepare-job-description-jd-for-the-role-of-a-software-developer/">
-            <div title="How to prepare Job Description (JD) for the role of a Software developer?" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                How to prepare Job Description (JD) for the role of a Software developer?
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/internal-job-posting-ijp-meaning-benefits-and-challenges/">
-            <div title="Internal job posting (IJP) | Meaning, Benefits and Challenges" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                Internal job posting (IJP) | Meaning, Benefits and Challenges
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/top-10-traditional-hr-interview-questions-and-answers/">
-            <div title="Top 10 Traditional HR Interview Questions and Answers" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                Top 10 Traditional HR Interview Questions and Answers
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/job-seekers/">
-            <div title="Job Seekers" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                Job Seekers
-            </div>
-        </a>
-
-        <a class="gfg-similar-read-item" href="https://www.geeksforgeeks.org/legal/job-portal-terms-of-service/">
-            <div title="JOB PORTAL TERMS OF SERVICE" rel="bookmark" class="gfg-similar-item-title three-line-restrict">
-                JOB PORTAL TERMS OF SERVICE
-            </div>
-        </a>
-                                    </div>
-                            </div>
-
+        <h3 class="new-top-bar top-bar-title">
+            Our top tips for interviews and job applications:
+        </h3>
+        <div class="tip-section">
+            <div class="tip-title">1. Research the Company</div>
+            <div class="tip-content"> Before attending an interview, make sure to research the company thoroughly. Understand its mission, values, culture, and recent achievements. This will help you tailor your responses and show your genuine interest in the company.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">2. Prepare Your Resume</div>
+            <div class="tip-content">Ensure your resume is up-to-date, error-free, and tailored to the job you are applying for. Highlight your relevant skills, experiences, and accomplishments. Use action verbs and quantify your achievements where possible.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">3. Practice Common Interview Questions</div>
+            <div class="tip-content">Practice answering common interview questions such as "Tell me about yourself," "Why do you want to work here?" and "What are your strengths and weaknesses?" This will help you feel more confident during the actual interview.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">4. Dress Appropriately</div>
+            <div class="tip-content">Dress appropriately for the interview, keeping in mind the company's culture. When in doubt, it's better to be slightly overdressed than underdressed.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">5. Follow Up</div>
+            <div class="tip-content">After the interview, send a thank-you email to the interviewer. Express you appreciation for the opportunity and reiterate your interest in the position. This leaves a positive impression and shows your professionalism.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">6. Network</div>
+            <div class="tip-content">Networking can open doors to job opportunities that are not advertised. Attend industry events, join professional organizations, and connect with people on LinkedIn to expand your network.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">7. Be Honest</div>
+            <div class="tip-content">Be honest about your skills and experiences. If you don't know the answer to a question, it's better to admit it and explain how you would go about finding the answer rather than trying to bluff.</div>
+        </div>
+        <div class="tip-section">
+            <div class="tip-title">8. Ask questions</div>
+            <div class="tip-content">Prepare a few questions to ask the interviewer. This shows your interest in the role and the company and helps you determine if it's the right fit for you.</div>
+        </div>
+    </div>
 {% endblock %}
