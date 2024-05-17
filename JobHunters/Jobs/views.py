@@ -15,14 +15,16 @@ def index(request):
 
 
 def frontpage(request):
+    # Fetch all job listings, applications by the current user and all employers
     job_listings = JobListing.objects.all()
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
     employers = Employer.objects.all()
 
-
+    # Get unique categories from job listings
     categories = list(dict.fromkeys(list(job_listings.values_list('category', flat=True))))
     categories = [category.title() for category in categories]
 
+    # Get filter and sort parameters from the request
     search_title = request.GET.get('title')
     employer = request.GET.get('employer')
     starting_date = request.GET.get('starting_date')
@@ -33,6 +35,7 @@ def frontpage(request):
     application_status = request.GET.get('application_status', '')
     is_remote = request.GET.get('is_remote')
 
+    # Apply filters based on the request parameters
     if search_title:
         job_listings = job_listings.filter(title__icontains=search_title)
     if employer:
@@ -48,6 +51,8 @@ def frontpage(request):
     if is_remote:
         job_listings = job_listings.filter(is_remote=bool(int(is_remote)))
 
+    # This application requires a list for jobs that the current user is applied to or not
+    # 1 for True, 0 for False
     if application_status:
         job_listing_id_list = list(job_applications.values_list('job_listing_id', flat=True))
         if application_status == "1":
@@ -55,9 +60,11 @@ def frontpage(request):
         if application_status == "0":
             job_listings = job_listings.exclude(id__in=job_listing_id_list)
 
+    # This application for 'salary' uses the helper-function 'normalize_salary'
     for job in job_listings:
         job.salary_display = normalize_salary(job.salary)
 
+    # The rest is for sorting starting- and due dates in ascending/descending order
     if sort == 'starting_date':
         job_listings = job_listings.order_by("starting_date")
 
@@ -70,6 +77,7 @@ def frontpage(request):
     if sort == '-due_date':
         job_listings = job_listings.order_by("-due_date")
 
+    # Return every fetched content to the frontpage at the end of the 'if' statements
     return render(request, 'Jobs/frontpage.html', {
         'job_listings': job_listings,
         'employers': employers,
@@ -77,24 +85,31 @@ def frontpage(request):
         })
 
 def normalize_salary(salary_str):
+    # Modify the string for salary to make it easier to calculate the salary
     try:
+        # Calculate per hour and modify the string
         if 'per hour' in salary_str:
             hourly_rate = float(salary_str.split()[0])
             annual_salary = hourly_rate * 40 * 52
             return f"${annual_salary:,.0f} per year"
+        # Calculate between low and high
         elif '-' in salary_str:
             parts = salary_str.split('-')
             low = float(parts[0].replace('$', '').replace('K', '000').strip())
             high = float(parts[1].replace('$', '000').replace('K', '000').strip())
             return f"${low:,.0f} - ${high:,.0f} per year"
+        # Replace 'K' to '000
         elif 'K' in salary_str:
             return f"${float(salary_str.replace('K', '000').replace('$', '').strip()):,.0f} per year"
+        # Replace 'M' to '000000'
         elif 'M' in salary_str:
             return f"${float(salary_str.replace('M', '000000').replace('$', '').strip()):,.0f} per year"
+        # End of 'if' statement
         return salary_str
     except ValueError:
         return salary_str
 
+# Filtering for all the footer-links
 def aboutUs(request):
     return render(request, 'Jobs/about_us.html')
 
