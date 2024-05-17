@@ -108,9 +108,37 @@ def jobDetails(request, id):
 
 @login_required
 def jobApplication(request, id):
+    # check if the job listing the application is for exists
+    job_listing = get_object_or_404(JobListing, pk=id)
+    print("hello")
     if request.method == 'POST':
-        pass
-    return render(request, 'Jobs/index.html' )
+        print("post request worked")
+        contact_form = ContactInformationForm(request.POST, prefix='contact')
+        cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
+        experience_form = ExperiencesForm(request.POST, prefix='exp')
+        recommendations_form = RecommendationsForm(request.POST, prefix='rec')
+        if contact_form.is_valid() and cover_letter_form.is_valid(): #and experience_form.is_valid() and recommendations_form.is_valid():
+            print('form is valid')
+            new_application = JobApplication.objects.create(
+                title=job_listing.title,
+                cover_letter=cover_letter_form.cleaned_data['text'],
+                status='processing',
+                full_name=contact_form.cleaned_data['full_name'],
+                street_name=contact_form.cleaned_data['street_name'],
+                house_number=contact_form.cleaned_data['house_number'],
+                city=contact_form.cleaned_data['city'],
+                postal_code=contact_form.cleaned_data['postal_code'],
+                job_seeker_id=request.user.id,
+                job_listing_id=job_listing.id
+            )
+            return render(request, 'Jobs/index.html' )
+        print("form is not valid")
+    return render(request, 'Jobs/job_application_page.html', context={
+        'form_contact': ContactInformationForm(prefix='contact'),
+        'form_cover_letter': CoverLetterForm(prefix='cover'),
+        'form_experience': ExperiencesForm(prefix='exp'),
+        'form_recommendations': RecommendationsForm(prefix='rec')
+    })
 
 """
 @login_required

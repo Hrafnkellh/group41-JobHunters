@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script>
+function display_contact(){
+    var contact_div = document.getElementById("contact_div");
+    var cover_letter_div = document.getElementById("cover_letter_div");
+    var experience_div = document.getElementById("experience_div");
+    var recommendations_div = document.getElementById("recommendations_div");
+
+    contact_div.style.display = "block";
+    cover_letter_div.style.display = "none";
+    experience_div.style.display = "none";
+    recommendations_div.style.display = "none";
+}
+
+function display_cover_letter(){
+    var contact_div = document.getElementById("contact_div");
+    var cover_letter_div = document.getElementById("cover_letter_div");
+    var experience_div = document.getElementById("experience_div");
+    var recommendations_div = document.getElementById("recommendations_div");
+
+    contact_div.style.display = "none";
+    cover_letter_div.style.display = "block";
+    experience_div.style.display = "none";
+    recommendations_div.style.display = "none";
+
+}
+
+function display_experience(){
+    var contact_div = document.getElementById("contact_div");
+    var cover_letter_div = document.getElementById("cover_letter_div");
+    var experience_div = document.getElementById("experience_div");
+    var recommendations_div = document.getElementById("recommendations_div");
+
+    contact_div.style.display = "none";
+    cover_letter_div.style.display = "none";
+    experience_div.style.display = "block";
+    recommendations_div.style.display = "none";
+}
+
+function display_recommendation(){
+    var contact_div = document.getElementById("contact_div");
+    var cover_letter_div = document.getElementById("cover_letter_div");
+    var experience_div = document.getElementById("experience_div");
+    var recommendations_div = document.getElementById("recommendations_div");
+
+    contact_div.style.display = "none";
+    cover_letter_div.style.display = "none";
+    experience_div.style.display = "none";
+    recommendations_div.style.display = "block";
+}
+
+</script>
+
+<div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div id="contact_div">
+            <h1>Please enter your contact information</h1>
+            <div class="form-floating">
+                {{ form_contact.as_p }}
+            </div>
+            <input onclick="display_cover_letter()" class="btn btn-primary" value="Next" >
+        </div>
+
+        <div id="cover_letter_div" style="display: none;">
+            <h1>Please enter a cover letter</h1>
+            <div class="form-floating">
+                {{ form_cover_letter.as_p }}
+            </div>
+            <input onclick="display_contact()" class="btn btn-primary" value="Back" >
+            <input onclick="display_experience()" class="btn btn-primary" value="Next" >
+        </div>
+
+        <div id="experience_div" style="display: none;">
+            <h1>Please enter your experience</h1>
+            <div class="form-floating">
+                {{ form_experience.as_p }}
+            </div>
+            <input onclick="display_cover_letter()" class="btn btn-primary" value="Back" >
+            <input onclick="display_recommendation()" class="btn btn-primary" value="Next" >
+        </div>
+
+        <div id="recommendations_div" style="display: none;">
+            <h1>Please enter your recommendations</h1>
+            <div class="form-floating">
+                {{ form_recommendations.as_p }}
+            </div>
+            <input onclick="display_experience()" class="btn btn-primary" value="Back" >
+            <input type="submit" class="btn btn-primary" value="Complete application" >
+        </div>
+        
+    </form>
+</div>
+{% endblock %}
