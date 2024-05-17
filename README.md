@@ -3,6 +3,7 @@
 We tested the website on firefox.
 
 For some reason the icons on the front page seem to go out of their boxes when using chrome so please don't use it.
+A chromium based browser will probably give you the same result.
 
 You can use it by running the following commands from the root directory of the application (the one this readme is in)
 python -m venv venv
