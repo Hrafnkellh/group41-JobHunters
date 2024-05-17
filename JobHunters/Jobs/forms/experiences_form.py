@@ -1,5 +1,5 @@
 from django import forms
-
+#experience form 
 class ExperiencesForm(forms.Form):
     place_of_work = forms.CharField(max_length=100, required=True)
     role = forms.CharField(max_length=100, required=False)
@@ -7,7 +7,7 @@ class ExperiencesForm(forms.Form):
     end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     def __init__(self, *args, **kwargs):
         super(ExperiencesForm, self).__init__(*args, **kwargs)
-
+        #apearence of experience.
         self.fields['place_of_work'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'place of work',
