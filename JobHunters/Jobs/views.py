@@ -110,12 +110,10 @@ def employers(request):
     })
 
 def jobDetails(request, id):
-    application = JobApplication.objects.filter(job_listing_id=id).first()
-    application_exists = application is not None
+    application_exists = JobApplication.objects.filter(job_listing_id=id).first() is not None
     return render(request, 'Jobs/job_details_site.html', context={
         'job_listing': get_object_or_404(JobListing, pk=id),
         'application_exists': application_exists,
-        'application': application
     })
 
 @login_required
