@@ -20,14 +20,14 @@ class JobListing(models.Model):
     
 class JobApplication(models.Model):
     title = models.CharField(max_length=255, default="undef")
-    cover_letter = models.CharField(max_length=255, default="undef")
-    status = models.CharField(max_length=255, default="undef")
-    full_name = models.CharField(max_length=255, default="undef")
-    street_name = models.CharField(max_length=255, default="undef")
-    house_number = models.CharField(max_length=255, default="undef")
-    city = models.CharField(max_length=255, default="undef")
-    country = models.CharField(max_length=255, default="undef")
-    postal_code = models.CharField(max_length=255, default="undef")
+    cover_letter = models.CharField(max_length=255, blank=True)
+    status = models.CharField(max_length=255, blank=True)
+    full_name = models.CharField(max_length=255, blank=True)
+    street_name = models.CharField(max_length=255, blank=True)
+    house_number = models.CharField(max_length=255, blank=True)
+    city = models.CharField(max_length=255, blank=True)
+    country = models.CharField(max_length=255, blank=True)
+    postal_code = models.CharField(max_length=255, blank=True)
 
     job_listing = models.ForeignKey(JobListing, on_delete=models.CASCADE, blank=False,  default=0)
     job_seeker = models.ForeignKey(JobSeeker, on_delete=models.CASCADE, blank=False,  default=0)
@@ -46,17 +46,17 @@ class Interview(models.Model):
 
 class Experience(models.Model):
     place_of_work = models.CharField(max_length=255)
-    role = models.CharField(max_length=255)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    role = models.CharField(max_length=255, null=True)
+    start_date = models.DateTimeField(null=True)
+    end_date = models.DateTimeField(null=True)
 
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE, blank=False)
 
 class Recommendation(models.Model):
     name = models.CharField(max_length=255)
-    email_address = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
+    email_address = models.CharField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=255, blank=True)
     may_be_contacted = models.BooleanField(blank=True)
-    role = models.CharField(max_length=255)
+    role = models.CharField(max_length=255, blank=True)
 
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE, blank=False)

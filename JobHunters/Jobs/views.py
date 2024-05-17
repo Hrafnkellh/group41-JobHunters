@@ -23,19 +23,19 @@ def frontpage(request):
     categories = [category.title() for category in categories]
 
     search_title = request.GET.get('title')
-    employer_id = request.GET.get('employer_id')
+    employer = request.GET.get('employer')
     starting_date = request.GET.get('starting_date')
     due_date = request.GET.get('due_date')
     time_type = request.GET.get('time_type')
     category = request.GET.get('category')
     sort = request.GET.get('sort', '')
-    applied = request.GET.get('applied', '')
+    application_status = request.GET.get('application_status', '')
     is_remote = request.GET.get('is_remote')
 
     if search_title:
         job_listings = job_listings.filter(title__icontains=search_title)
-    if employer_id:
-        job_listings = job_listings.filter(employer_id__exact=employer_id)
+    if employer:
+        job_listings = job_listings.filter(employer_id__exact=employer)
     if starting_date:
         job_listings = job_listings.filter(starting_date__gte=parse_date(starting_date))
     if due_date:
@@ -47,16 +47,16 @@ def frontpage(request):
     if is_remote:
         job_listings = job_listings.filter(is_remote=bool(int(is_remote)))
 
-    if applied:
-        job_listing_id_list = list(job_applications.values_list('job_seeker_id', flat=True))
-        job_listings = job_listings.filter(id__in=job_listing_id_list)
+    if application_status:
+        job_listing_id_list = list(job_applications.values_list('job_listing_id', flat=True))
+        if application_status == "1":
+            job_listings = job_listings.filter(id__in=job_listing_id_list)
+        if application_status == "0":
+            job_listings = job_listings.exclude(id__in=job_listing_id_list)
 
 
     for job in job_listings:
         job.salary_display = normalize_salary(job.salary)
-
-    if sort == 'applied':
-        job_listings = job_listings.order_by("jobapplication__job_seeker__user_id")
 
     if sort == 'starting_date':
         job_listings = job_listings.order_by("starting_date")
@@ -69,10 +69,6 @@ def frontpage(request):
 
     if sort == '-due_date':
         job_listings = job_listings.order_by("-due_date")
-
-    else:
-        # TODO: Setup default sorting
-        print()
 
     return render(request, 'Jobs/frontpage.html', {
         'job_listings': job_listings,
@@ -114,8 +110,12 @@ def employers(request):
     })
 
 def jobDetails(request, id):
+    application = JobApplication.objects.filter(job_listing_id=id).first()
+    application_exists = application is not None
     return render(request, 'Jobs/job_details_site.html', context={
-        'job_listing': get_object_or_404(JobListing, pk=id)
+        'job_listing': get_object_or_404(JobListing, pk=id),
+        'application_exists': application_exists,
+        'application': application
     })
 
 @login_required
@@ -124,6 +124,7 @@ def jobApplication(request, id):
     job_listing = get_object_or_404(JobListing, pk=id)
 
     if request.method == 'POST':
+        print("post request worked")
         contact_form = ContactInformationForm(request.POST, prefix='contact')
         cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
         experience_form = ExperiencesForm(request.POST, prefix='exp')
@@ -163,9 +164,9 @@ def jobApplication(request, id):
                     job_application_id=new_job_application.id
                 )
                 successes.append('Recommendation has been recorded')
-
-            return render(request, 'Jobs/index.html' )
-
+            return render(request=request, template_name='Jobs/congratulations.html', context={
+                'successes': successes
+            })
     return render(request, 'Jobs/job_application_page.html', context={
         'form_contact': ContactInformationForm(prefix='contact'),
         'form_cover_letter': CoverLetterForm(prefix='cover'),
