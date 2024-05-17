@@ -54,7 +54,6 @@ def frontpage(request):
         if application_status == "0":
             job_listings = job_listings.exclude(id__in=job_listing_id_list)
 
-
     for job in job_listings:
         job.salary_display = normalize_salary(job.salary)
 
@@ -120,12 +119,13 @@ def jobDetails(request, id):
 def jobApplication(request, id):
     # check if the job listing the application is for exists
     job_listing = get_object_or_404(JobListing, pk=id)
-
+    #if requested post method then we create variables for the forms for posting process.
     if request.method == 'POST':
         contact_form = ContactInformationForm(request.POST, prefix='contact')
         cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
         experience_form = ExperiencesForm(request.POST, prefix='exp')
         recommendations_form = RecommendationsForm(request.POST, prefix='rec')
+        #content form check and populated.
         if contact_form.is_valid() and cover_letter_form.is_valid():
             new_job_application = JobApplication.objects.create(
                 title=job_listing.title,
@@ -141,7 +141,7 @@ def jobApplication(request, id):
                 job_listing_id=job_listing.id
             )
             successes = ['Job Application creation succeeded']
-
+            #check for experience form and is populated.
             if experience_form.is_valid():
                 Experience.objects.create(
                     place_of_work=experience_form.cleaned_data['place_of_work'],
@@ -151,7 +151,7 @@ def jobApplication(request, id):
                     job_application_id=new_job_application.id
                 )
                 successes.append('Experience has been recorded')
-
+            #check for recommendation form and populated.
             if recommendations_form.is_valid():
                 Recommendation.objects.create(
                     name=recommendations_form.cleaned_data['name'],
@@ -165,6 +165,7 @@ def jobApplication(request, id):
             return render(request=request, template_name='Jobs/congratulations.html', context={
                 'successes': successes
             })
+        #renderinn the beginning of the site.
     return render(request, 'Jobs/job_application_page.html', context={
         'form_contact': ContactInformationForm(prefix='contact'),
         'form_cover_letter': CoverLetterForm(prefix='cover'),
