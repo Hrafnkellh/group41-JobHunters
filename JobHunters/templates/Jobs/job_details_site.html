@@ -25,7 +25,11 @@
         <div class="d-grid gap-2">
             <div class="d-grid gap-2">
                 <a class="btn btn-outline-secondary" type="button" href="{% url 'employer_details' id=job_listing.employer.id %}">Go to {{job_listing.employer.name}}'s page</a>
-                <a class="btn btn-primary" type="button" href="{% url 'job_application' id=job_listing.id %}">Apply</a>
+                {% if application_exists %}
+                    <a class="btn btn-primary" type="button" href="{% url 'application_details' id=job_listing.id %}">You have already applied for this job, click to view the application</a>
+                {% else %}
+                    <a class="btn btn-primary" type="button" href="{% url 'job_application' id=job_listing.id %}">Apply</a>
+                {% endif %}
             </div>
         </div>
     </div>

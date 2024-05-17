@@ -18,7 +18,6 @@ def index(request):
 def frontpage(request):
     job_listings = JobListing.objects.all()
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
-    print(list(job_applications))
     employers = Employer.objects.all()
     categories = list(dict.fromkeys(list(job_listings.values_list('category', flat=True))))
     categories = [category.title() for category in categories]
@@ -50,7 +49,6 @@ def frontpage(request):
 
     if application_status:
         job_listing_id_list = list(job_applications.values_list('job_listing_id', flat=True))
-        print(job_listing_id_list)
         if application_status == "1":
             job_listings = job_listings.filter(id__in=job_listing_id_list)
         if application_status == "0":
@@ -112,8 +110,12 @@ def employers(request):
     })
 
 def jobDetails(request, id):
+    application = JobApplication.objects.filter(job_listing_id=id).first()
+    application_exists = application is not None
     return render(request, 'Jobs/job_details_site.html', context={
-        'job_listing': get_object_or_404(JobListing, pk=id)
+        'job_listing': get_object_or_404(JobListing, pk=id),
+        'application_exists': application_exists,
+        'application': application
     })
 
 @login_required
@@ -122,6 +124,7 @@ def jobApplication(request, id):
     job_listing = get_object_or_404(JobListing, pk=id)
 
     if request.method == 'POST':
+        print("post request worked")
         contact_form = ContactInformationForm(request.POST, prefix='contact')
         cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
         experience_form = ExperiencesForm(request.POST, prefix='exp')
@@ -161,9 +164,9 @@ def jobApplication(request, id):
                     job_application_id=new_job_application.id
                 )
                 successes.append('Recommendation has been recorded')
-
-            return render(request, 'Jobs/index.html' )
-
+            return render(request=request, template_name='Jobs/congratulations.html', context={
+                'successes': successes
+            })
     return render(request, 'Jobs/job_application_page.html', context={
         'form_contact': ContactInformationForm(prefix='contact'),
         'form_cover_letter': CoverLetterForm(prefix='cover'),

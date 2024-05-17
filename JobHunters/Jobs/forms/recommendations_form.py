@@ -2,8 +2,8 @@ from django import forms
 
 class RecommendationsForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
-    email_address = forms.EmailField(required=True)
-    phone_number = forms.IntegerField(required=False)
+    email_address = forms.EmailField(required=False)
+    phone_number = forms.CharField(max_length=100, required=False)
     role = forms.CharField(required=False)
     may_be_contacted = forms.BooleanField(required=False)
     def __init__(self, *args, **kwargs):
