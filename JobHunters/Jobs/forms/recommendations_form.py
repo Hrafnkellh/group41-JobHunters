@@ -6,8 +6,6 @@ class RecommendationsForm(forms.Form):
     email_address = forms.EmailField()
     phone_number = forms.IntegerField()
     role = forms.CharField()
-    job_application_id = forms.IntegerField()
-
     may_be_contacted = forms.BooleanField()
     def __init__(self, *args, **kwargs):
         super(RecommendationsForm, self).__init__(*args, **kwargs)
@@ -35,10 +33,5 @@ class RecommendationsForm(forms.Form):
         self.fields['role'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'role',
-            'style': 'width: 300px;'
-        })
-        self.fields['job_application_id'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'job application id',
             'style': 'width: 300px;'
         })
