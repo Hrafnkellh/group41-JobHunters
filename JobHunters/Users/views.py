@@ -8,17 +8,19 @@ from Users.models import Employer, Profile, JobSeeker
 from Users.forms.UserCreationForm import CreationForm
 from Users.forms.Sign_in_form import log_in_form
 
-# Create your views here.
 def index(request):
     return render(request, 'Users/index.html' )
 
 def login_page(request):
     if request.method == 'POST':
         form = log_in_form(data=request.POST)
+        # checks if the form was correctly filled.
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            # use built in authentication to validate the input.
             user = authenticate(request, username=username, password=password)
+            # if user is found.
             if user is not None:
                 login(request, user)
                 return redirect('profile')
@@ -29,22 +31,26 @@ def register(request):
         form = CreationForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
+            # creates new user labeled as jobseeker.
             JobSeeker.objects.create(user=new_user)
             return redirect('log_in')
     return render(request, 'Users/sign_up.html', {'form': CreationForm()})
 
 @login_required
 def profile(request):
-    profile = request.user
+    # find the user that is logged in.
     jobseeker = JobSeeker.objects.filter(user=request.user).first()
     if request.method == 'POST':
+        # the form for editing the profile
         form = ProfileForm(instance=jobseeker, data=request.POST)
         if form.is_valid():
+            # we had commit false but changed to commit true when fixing a problem and it has been working for us so we did not change back.
             jobseeker = form.save(commit=True)
             jobseeker.user = request.user
             jobseeker.save()
             return redirect('profile')
     return render(request, 'Users/profile.html', {
+        # making sure all the neccesary context is available.
         'form': ProfileForm(instance=jobseeker),'user': request.user, 'jobseeker': jobseeker, 'applications': JobApplication.objects.filter(job_seeker=jobseeker)
         })
 
@@ -66,9 +72,11 @@ def applicationDetails(request, id):
 @login_required
 def change_user_password(request):
     if request.method == 'POST':
+        # use a custom change password form which is based on django's change password form.
         form = change_password_form(request.user, request.POST)
         if form.is_valid():
             user = form.save()
+            # makes the user stay logged in after changing the password.
             update_session_auth_hash(request, user)
             return redirect('profile')
     else:
@@ -77,7 +85,9 @@ def change_user_password(request):
 
 @login_required
 def delete_application(request, id):
+    # get the user that is requesting to delete their application.
     jobseeker = get_object_or_404(JobSeeker, user=request.user)
+    # get the application from said user.
     application = get_object_or_404(JobApplication, id=id, job_seeker=jobseeker)
     if request.method == 'POST':
         application.delete()

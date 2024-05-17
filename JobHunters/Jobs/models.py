@@ -12,7 +12,6 @@ class JobListing(models.Model):
     due_date = models.DateField(blank=True, null=True)
     starting_date = models.DateField(blank=True, null=True)
     is_remote = models.BooleanField(default=False)
-
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, blank=False,  default=0)
 
     def __str__(self):
