@@ -15,6 +15,22 @@
         <p style="color: #333;">Company: {{ application.job_listing.employer.name }}</p>
         <p style="font-style: italic; color: #888;">Hours: {{ application.job_listing.time_type }}</p>
         <p style="color: #333;">Category: {{ application.job_listing.category }}</p>
+
+        {% if experience is not None %}
+            <h1>Previous experience</h1>
+            <p>Place of work: {{experience.place_of_work}}</p>
+            <p>Role: {{experience.role}}</p>
+            <p>Start date: {{experience.start_date}}</p>
+            <p>End date: {{experience.end_date}}</p>
+        {% endif %}
+
+        {% if recommendation is not None %}
+            <h1>Recommendation</h1>
+            <p>Name: {{recommendation.name}}</p>
+            <p>Email Address: {{recommendation.email_address}}</p>
+            <p>Phone Number: {{recommendation.phone_number}}</p>
+            <p>Role: {{recommendation.role}}</p>
+        {% endif %}
     </div>
 </form>
 

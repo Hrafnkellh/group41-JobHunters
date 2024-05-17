@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import logout, authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from pyexpat.errors import messages
-from Jobs.models import JobApplication, JobListing
+from Jobs.models import Experience, JobApplication, JobListing, Recommendation
 from Users.forms.change_password import change_password_form
 from Users.forms.profile_form import ProfileForm
 from Users.models import Employer, Profile, JobSeeker
@@ -59,8 +59,11 @@ def employerDetails(request, id):
 
 @login_required
 def applicationDetails(request, id):
+    application = get_object_or_404(JobApplication, job_seeker_id=request.user.id, job_listing_id=id)
     return render(request, 'Users/application_details_site.html', context={
-        'application': get_object_or_404(JobApplication, job_seeker_id=request.user.id, job_listing_id=id)
+        'application': application,
+        'experience': Experience.objects.filter(job_application_id=application.id).first(),
+        'recommendation': Recommendation.objects.filter(job_application_id=application.id).first()
     })
 
 @login_required
