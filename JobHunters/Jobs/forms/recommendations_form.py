@@ -1,11 +1,11 @@
 from django import forms
 
 class RecommendationsForm(forms.Form):
-    name = forms.CharField()
+    name = forms.CharField(max_length=100, required=True)
     email_address = forms.EmailField()
-    phone_number = forms.IntegerField()
+    phone_number = forms.IntegerField(required=True)
     role = forms.CharField()
-    may_be_contacted = forms.BooleanField()
+    may_be_contacted = forms.BooleanField(required=False)
     def __init__(self, *args, **kwargs):
         super(RecommendationsForm, self).__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({

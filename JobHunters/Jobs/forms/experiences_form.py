@@ -1,8 +1,8 @@
 from django import forms
 
 class ExperiencesForm(forms.Form):
-    place_of_work = forms.CharField()
-    role = forms.CharField()
+    place_of_work = forms.CharField(max_length=100, required=True)
+    role = forms.CharField(max_length=100)
     start_date = forms.DateField()
     end_date = forms.DateField()
     def __init__(self, *args, **kwargs):

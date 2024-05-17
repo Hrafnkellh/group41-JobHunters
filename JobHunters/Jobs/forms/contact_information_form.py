@@ -1,13 +1,13 @@
 from django import forms
 from django_countries.fields import CountryField
 
-class ContactInformationForm(forms.Form):
-    full_name = forms.CharField()
-    street_name = forms.CharField()
-    house_number = forms.IntegerField()
-    city = forms.CharField()
+class ContactInformationForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=100, required=True)
+    street_name = forms.CharField(max_length=120)
+    house_number = forms.IntegerField(max_value=999)
+    city = forms.CharField(max_length=100)
     country = CountryField(blank_label="select country")
-    postal_code = forms.CharField()
+    postal_code = forms.CharField(max_length=5)
     def __init__(self, *args, **kwargs):
         super(ContactInformationForm, self).__init__(*args, **kwargs)
 
