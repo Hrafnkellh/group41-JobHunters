@@ -1,22 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<script>
 
-// here I tried to make the last two entries in the browser's history
-// would be removed using the history API so that pressing the back
-// button would take you to the home page instead of back to the application.
-// this does not seem to work however.
-function removeLastHistoryEntry() {
-
-            history.replaceState(null, null, document.URL);
-
-            setTimeout(() => {
-                history.pushState(null, null, document.URL);
-                history.replaceState(null, null, document.URL);
-            }, 100);
-        }
-window.onload = removeLastHistoryEntry;
-</script>
 <div class="congratulation-area text-center mt-5">
     <div class="container">
         <div class="congratulation-wrapper">
