@@ -26,9 +26,7 @@ def frontpage(request):
     category = request.GET.get('category')
     sort = request.GET.get('sort', '')
     applied = request.GET.get('applied', '')
-
-    filtering = [applied]
-    sorting = [starting_date, due_date, time_type, category, sort]
+    is_remote = request.GET.get('is_remote')
 
     if starting_date:
         job_listings = job_listings.filter(starting_date__gte=parse_date(starting_date))
@@ -38,6 +36,8 @@ def frontpage(request):
         job_listings = job_listings.filter(time_type__iexact=time_type)
     if category:
         job_listings = job_listings.filter(category__iexact=category)
+    if is_remote:
+        job_listings = job_listings.filter(is_remote=bool(int(is_remote)))
 
     if applied:
         job_listing_id_list = list(job_applications.values_list('job_seeker_id', flat=True))
@@ -49,6 +49,19 @@ def frontpage(request):
 
     if sort == 'applied':
         job_listings = job_listings.order_by("jobapplication__job_seeker__user_id")
+
+    if sort == 'starting_date':
+        job_listings = job_listings.order_by("starting_date")
+
+    if sort == 'due_date':
+        job_listings = job_listings.order_by("due_date")
+
+    if sort == '-starting_date':
+        job_listings = job_listings.order_by("-starting_date")
+
+    if sort == '-due_date':
+        job_listings = job_listings.order_by("-due_date")
+
     else:
         # TODO: Setup default sorting
         print()
