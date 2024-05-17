@@ -28,8 +28,3 @@ class RecommendationsForm(forms.Form):
             'placeholder': 'role',
             'style': 'width: 300px;'
         })
-        self.fields['may_be_contacted'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'may be contacted',
-            'style': 'width: 300px;'
-        })
