@@ -18,7 +18,9 @@ def index(request):
 def frontpage(request):
     job_listings = JobListing.objects.all()
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
-
+    employers = Employer.objects.all()
+    categories = list(dict.fromkeys(list(job_listings.values_list('category', flat=True))))
+    categories = [category.title() for category in categories]
 
     search_title = request.GET.get('title')
     employer_id = request.GET.get('employer_id')
@@ -72,7 +74,11 @@ def frontpage(request):
         # TODO: Setup default sorting
         print()
 
-    return render(request, 'Jobs/frontpage.html', { 'job_listings': job_listings})
+    return render(request, 'Jobs/frontpage.html', {
+        'job_listings': job_listings,
+        'employers': employers,
+        'categories': categories
+        })
 
 def normalize_salary(salary_str):
     try:
