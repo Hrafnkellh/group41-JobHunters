@@ -106,9 +106,13 @@ def jobDetails(request, id):
         'job_listing': get_object_or_404(JobListing, pk=id)
     })
 
+@login_required
+def jobApplication(request, id):
+    if request.method == 'POST':
+        pass
+    return render(request, 'Jobs/index.html' )
 
-
-
+"""
 @login_required
 
 def JAP_1_1(request,id):
@@ -132,7 +136,7 @@ def JAP_1_1(request,id):
         'form': ContactInformationForm(),
         'my_url': url
     })
-"""
+
 def JAP_1_2(request,id,form):
     print(request.method)
     if request.method == 'POST':
@@ -164,7 +168,7 @@ def JAP_1_3(request,id,form,form1):
         'form': ExperiencesForm(),
         'my_url': url
     })
-    """
+   
 
 @login_required
 def jobApplicationPage1Contact(request,id):
@@ -210,3 +214,4 @@ def jobApplicatonPage3(request, id):
     return render(request,'Jobs/job_application_page3_expRec.html', {
         'JobListing': get_object_or_404(JobListing, pk=id)
     })
+ """
