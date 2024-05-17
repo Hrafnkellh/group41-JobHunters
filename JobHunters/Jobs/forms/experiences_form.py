@@ -3,8 +3,8 @@ from django import forms
 class ExperiencesForm(forms.Form):
     place_of_work = forms.CharField(max_length=100, required=True)
     role = forms.CharField(max_length=100, required=True)
-    start_date = forms.DateField(required=False)
-    end_date = forms.DateField(required=False)
+    start_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     def __init__(self, *args, **kwargs):
         super(ExperiencesForm, self).__init__(*args, **kwargs)
 

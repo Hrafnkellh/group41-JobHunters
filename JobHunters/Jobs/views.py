@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from Users.models import Employer
-from Jobs.models import JobListing, JobApplication, JobSeeker
+from Jobs.models import Experience, JobListing, JobApplication, JobSeeker, Recommendation
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
@@ -18,7 +18,9 @@ def index(request):
 def frontpage(request):
     job_listings = JobListing.objects.all()
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
-
+    employers = Employer.objects.all()
+    categories = list(dict.fromkeys(list(job_listings.values_list('category', flat=True))))
+    categories = [category.title() for category in categories]
 
     search_title = request.GET.get('title')
     employer_id = request.GET.get('employer_id')
@@ -72,7 +74,11 @@ def frontpage(request):
         # TODO: Setup default sorting
         print()
 
-    return render(request, 'Jobs/frontpage.html', { 'job_listings': job_listings})
+    return render(request, 'Jobs/frontpage.html', {
+        'job_listings': job_listings,
+        'employers': employers,
+        'categories': categories
+        })
 
 def normalize_salary(salary_str):
     try:
@@ -116,16 +122,14 @@ def jobDetails(request, id):
 def jobApplication(request, id):
     # check if the job listing the application is for exists
     job_listing = get_object_or_404(JobListing, pk=id)
-    print("hello")
+
     if request.method == 'POST':
-        print("post request worked")
         contact_form = ContactInformationForm(request.POST, prefix='contact')
         cover_letter_form = CoverLetterForm(request.POST, prefix='cover')
         experience_form = ExperiencesForm(request.POST, prefix='exp')
         recommendations_form = RecommendationsForm(request.POST, prefix='rec')
-        if contact_form.is_valid() and cover_letter_form.is_valid(): #and experience_form.is_valid() and recommendations_form.is_valid():
-            print('form is valid')
-            new_application = JobApplication.objects.create(
+        if contact_form.is_valid() and cover_letter_form.is_valid():
+            new_job_application = JobApplication.objects.create(
                 title=job_listing.title,
                 cover_letter=cover_letter_form.cleaned_data['text'],
                 status='processing',
@@ -137,8 +141,31 @@ def jobApplication(request, id):
                 job_seeker_id=request.user.id,
                 job_listing_id=job_listing.id
             )
+            successes = ['Job Application creation succeeded']
+
+            if experience_form.is_valid():
+                Experience.objects.create(
+                    place_of_work=experience_form.cleaned_data['place_of_work'],
+                    role=experience_form.cleaned_data['role'],
+                    start_date=experience_form.cleaned_data['start_date'],
+                    end_date=experience_form.cleaned_data['end_date'],
+                    job_application_id=new_job_application.id
+                )
+                successes.append('Experience has been recorded')
+
+            if recommendations_form.is_valid():
+                Recommendation.objects.create(
+                    name=recommendations_form.cleaned_data['name'],
+                    email_address=recommendations_form.cleaned_data['email_address'],
+                    phone_number=recommendations_form.cleaned_data['phone_number'],
+                    may_be_contacted=recommendations_form.cleaned_data['may_be_contacted'],
+                    role=recommendations_form.cleaned_data['role'],
+                    job_application_id=new_job_application.id
+                )
+                successes.append('Recommendation has been recorded')
+
             return render(request, 'Jobs/index.html' )
-        print("form is not valid")
+
     return render(request, 'Jobs/job_application_page.html', context={
         'form_contact': ContactInformationForm(prefix='contact'),
         'form_cover_letter': CoverLetterForm(prefix='cover'),
