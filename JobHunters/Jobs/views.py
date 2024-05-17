@@ -20,7 +20,8 @@ def frontpage(request):
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
 
 
-    search_title = request.GET.get('search_title')
+    search_title = request.GET.get('title')
+    employer_id = request.GET.get('employer_id')
     starting_date = request.GET.get('starting_date')
     due_date = request.GET.get('due_date')
     time_type = request.GET.get('time_type')
@@ -31,6 +32,8 @@ def frontpage(request):
 
     if search_title:
         job_listings = job_listings.filter(title__icontains=search_title)
+    if employer_id:
+        job_listings = job_listings.filter(employer_id__exact=employer_id)
     if starting_date:
         job_listings = job_listings.filter(starting_date__gte=parse_date(starting_date))
     if due_date:
