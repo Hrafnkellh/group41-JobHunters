@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="h3 mb-3 fw-normal">Please enter your contact information</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-floating">
+        {{ form }}
+    </div>
+    <hr>
+    <input type="submit" class="btn btn-primary"  href=" {{my_url}}" value="Next" >
+</form>
+    
+{% endblock %}

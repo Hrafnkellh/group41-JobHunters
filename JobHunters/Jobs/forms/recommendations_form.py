@@ -1,22 +1,13 @@
 from django import forms
 
 class RecommendationsForm(forms.Form):
-    id = forms.IntegerField()
-    name = forms.CharField()
+    name = forms.CharField(max_length=100, required=True)
     email_address = forms.EmailField()
-    phone_number = forms.IntegerField()
+    phone_number = forms.IntegerField(required=True)
     role = forms.CharField()
-    job_application_id = forms.IntegerField()
-
-    may_be_contacted = forms.BooleanField()
+    may_be_contacted = forms.BooleanField(required=False)
     def __init__(self, *args, **kwargs):
         super(RecommendationsForm, self).__init__(*args, **kwargs)
-
-        self.fields['id'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'id',
-            'style': 'width: 300px;'
-        })
         self.fields['name'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'full name',
@@ -37,8 +28,8 @@ class RecommendationsForm(forms.Form):
             'placeholder': 'role',
             'style': 'width: 300px;'
         })
-        self.fields['job_application_id'].widget.attrs.update({
+        self.fields['may_be_contacted'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': 'job application id',
+            'placeholder': 'may be contacted',
             'style': 'width: 300px;'
         })

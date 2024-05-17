@@ -34,8 +34,9 @@
     </div>
     <hr>
 
-    <h1 style="text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">Job Applications</h1>
-    <div class="container">
+    <!--<h1 style="text-align: center; font-weight: bold; font-family: 'Times New Roman', Times, serif;">Job Applications</h1>-->
+    <h3>Job Applications</h3>
+    <div class="container"style="text-align: left; background-color: #f8f9fa; border-radius: 10px; padding: 20px; display: flex; flex-direction: row; align-items: stretch;">
         <div class="row">
             {% for application in applications %}
                 {% include 'Users/single_application.html' with application=application %}
