@@ -2,6 +2,11 @@
 {% block content %}
 
 <script>
+
+// these functions exist to create a multi step application process
+// in one view, by making only one step visible at a time.
+// Each function displays one part of the process as its name implies.
+
 function display_contact(){
     var contact_div = document.getElementById("contact_div");
     var cover_letter_div = document.getElementById("cover_letter_div");
