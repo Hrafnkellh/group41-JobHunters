@@ -19,6 +19,8 @@ def frontpage(request):
     job_listings = JobListing.objects.all()
     job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
     employers = Employer.objects.all()
+
+
     categories = list(dict.fromkeys(list(job_listings.values_list('category', flat=True))))
     categories = [category.title() for category in categories]
 
@@ -109,7 +111,7 @@ def employers(request):
     })
 
 def jobDetails(request, id):
-    application_exists = JobApplication.objects.filter(job_listing_id=id).first() is not None
+    application_exists = JobApplication.objects.filter(job_listing_id=id, job_seeker_id=request.user.id).exists()
     return render(request, 'Jobs/job_details_site.html', context={
         'job_listing': get_object_or_404(JobListing, pk=id),
         'application_exists': application_exists,
@@ -119,6 +121,7 @@ def jobDetails(request, id):
 def jobApplication(request, id):
     # check if the job listing the application is for exists
     job_listing = get_object_or_404(JobListing, pk=id)
+    application_exists = JobApplication.objects.filter(job_listing_id=id, job_seeker_id=request.user.id).exists()
     #if requested post method then we create variables for the forms for posting process.
     if request.method == 'POST':
         contact_form = ContactInformationForm(request.POST, prefix='contact')
@@ -165,6 +168,8 @@ def jobApplication(request, id):
             return render(request=request, template_name='Jobs/congratulations.html', context={
                 'successes': successes
             })
+    if application_exists:
+        return redirect(to='jobDetails', id=id)
         #renderinn the beginning of the site.
     return render(request, 'Jobs/job_application_page.html', context={
         'form_contact': ContactInformationForm(prefix='contact'),
