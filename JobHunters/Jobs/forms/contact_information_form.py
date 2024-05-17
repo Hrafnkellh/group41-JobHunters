@@ -1,7 +1,7 @@
 from django import forms
 from django_countries.fields import CountryField
 
-class ContactInformationForm(forms.ModelForm):
+class ContactInformationForm(forms.Form):
     full_name = forms.CharField()
     street_name = forms.CharField()
     house_number = forms.IntegerField()
@@ -31,6 +31,7 @@ class ContactInformationForm(forms.ModelForm):
             'placeholder': 'City',
             'style': 'width: 300px;'
         })
+
         self.fields['postal_code'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': '000',
