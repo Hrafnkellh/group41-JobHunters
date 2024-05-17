@@ -109,7 +109,7 @@ def normalize_salary(salary_str):
     except ValueError:
         return salary_str
 
-# Filtering for all the footer-links
+# The footer-links
 def aboutUs(request):
     return render(request, 'Jobs/about_us.html')
 
@@ -119,6 +119,7 @@ def faq(request):
 def jobTips(request):
     return render(request, 'Jobs/job_tips.html')
 
+# Employers are filtered for employers.html
 def employers(request):
     return render(request, 'Jobs/employers.html', context={
         'employers': Employer.objects.all()
