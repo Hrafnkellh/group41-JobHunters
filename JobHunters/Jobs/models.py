@@ -24,10 +24,10 @@ class JobApplication(models.Model):
     status = models.CharField(max_length=255, blank=True)
     full_name = models.CharField(max_length=255, blank=True)
     street_name = models.CharField(max_length=255, blank=True)
-    house_number = models.CharField(max_length=255, blank=True)
+    house_number = models.IntegerField(blank=True, null=True)
     city = models.CharField(max_length=255, blank=True)
     country = models.CharField(max_length=255, blank=True)
-    postal_code = models.CharField(max_length=255, blank=True)
+    postal_code = models.IntegerField(blank=True, null=True)
 
     job_listing = models.ForeignKey(JobListing, on_delete=models.CASCADE, blank=False,  default=0)
     job_seeker = models.ForeignKey(JobSeeker, on_delete=models.CASCADE, blank=False,  default=0)
