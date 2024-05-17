@@ -1,25 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <section class="jumbotron text-center"></section>
-    <form method="GET" action="">
-       <div class="col-md-3 mb-4 ms-auto">
-            <label for="filter-dropdown" class="form-label">Sort by:</label>
-            <select name="filter" class="form-select" id="filter-dropdown" onchange="this.form.submit()">
-                <option value="">Choose...</option>
-                <option value="title">Job Titles</option>
-                <option value="employer">Employers</option>
-                <option value="salary">Salary</option>
-            </select>
-        </div>
-    </form>
-
     <div class="album py-5 bg-light">
         <div class="container">
-          <div class="row">
+            {% include 'Jobs/filter.html' %}
+            <div class="row">
             {% for job_listing in job_listings %}
               {% include 'Jobs/single_job.html' with job_listing=job_listing %}
             {% endfor %}
-          </div>
+            </div>
         </div>
     </div>
     <style>
