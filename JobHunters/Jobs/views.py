@@ -8,6 +8,9 @@ from Jobs.forms.experiences_form import ExperiencesForm
 from Jobs.forms.recommendations_form import RecommendationsForm
 from django.utils.dateparse import parse_date
 
+from Users.models import Employer
+
+
 # Create your views here.
 def index(request):
     return render(request, 'Jobs/index.html' )
