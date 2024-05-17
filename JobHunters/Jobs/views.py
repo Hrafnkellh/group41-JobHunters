@@ -12,15 +12,21 @@ from django.utils.dateparse import parse_date
 def index(request):
     return render(request, 'Jobs/index.html' )
 
+
 def frontpage(request):
     job_listings = JobListing.objects.all()
+    job_applications = JobApplication.objects.filter(job_seeker_id = request.user.id)
+
 
     starting_date = request.GET.get('starting_date')
     due_date = request.GET.get('due_date')
     time_type = request.GET.get('time_type')
     category = request.GET.get('category')
     sort = request.GET.get('sort', '')
+    applied = request.GET.get('applied', '')
 
+    filtering = [applied]
+    sorting = [starting_date, due_date, time_type, category, sort]
 
     if starting_date:
         job_listings = job_listings.filter(starting_date__gte=parse_date(starting_date))
@@ -31,12 +37,19 @@ def frontpage(request):
     if category:
         job_listings = job_listings.filter(category__iexact=category)
 
+    if applied:
+        job_listing_id_list = list(job_applications.values_list('job_seeker_id', flat=True))
+        job_listings = job_listings.filter(id__in=job_listing_id_list)
+
 
     for job in job_listings:
         job.salary_display = normalize_salary(job.salary)
 
-    if sort:
-        job_listings = job_listings.order_by(sort)
+    if sort == 'applied':
+        job_listings = job_listings.order_by("jobapplication__job_seeker__user_id")
+    else:
+        # TODO: Setup default sorting
+        print()
 
     return render(request, 'Jobs/frontpage.html', { 'job_listings': job_listings})
 
