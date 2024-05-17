@@ -56,7 +56,7 @@ class Recommendation(models.Model):
     name = models.CharField(max_length=255)
     email_address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
-    may_be_contacted = models.BooleanField()
+    may_be_contacted = models.BooleanField(blank=True)
     role = models.CharField(max_length=255)
 
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE, blank=False)

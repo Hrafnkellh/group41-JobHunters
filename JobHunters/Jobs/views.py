@@ -93,8 +93,61 @@ def jobDetails(request, id):
         'job_listing': get_object_or_404(JobListing, pk=id)
     })
 
+
+
+
 @login_required
 
+def JAP_1_1(request,id):
+    print(request.method)
+    if request.method == 'POST':
+        form = ContactInformationForm()
+        print("its a post malone1_1")
+        if form.is_valid():
+            form.save()
+            form = ContactInformationForm(data=request.POST)
+            return render('JobApp_1_2')
+            #return redirect('log_in')
+
+    url = reverse('jobApp_1_2', kwargs={'id': id})
+    return render(request, 'Jobs/JAP_1_1.html', {
+        'form': ContactInformationForm(),
+        'my_url': url
+    })
+
+def JAP_1_2(request,id):
+    print(request.method)
+    if request.method == 'POST':
+        form1 = RecommendationsForm(data=request.POST)
+        print("its a post malone")
+        if form1.is_valid():
+            form1.save()
+            return render('JobApp_1_3')
+            #return redirect('log_in')
+
+    url = reverse('jobApp_1_3', kwargs={'id': id})
+    return render(request, 'Jobs/JAP_1_2.html', {
+        'form1': RecommendationsForm(),
+        'my_url': url
+    })
+
+def JAP_1_3(request,id):
+    print(request.method)
+    if request.method == 'POST':
+        form2 = ExperiencesForm(data=request.POST)
+        print("its a post malone")
+        if form2.is_valid():
+            form2.save()
+            return render('jobApplicationn')
+            #return redirect('log_in')
+
+    url = reverse('jobApplicationn', kwargs={'id': id})
+    return render(request, 'Jobs/JAP_1_3.html', {
+        'form': ExperiencesForm(),
+        'my_url': url
+    })
+
+@login_required
 def jobApplicationPage1Contact(request,id):
     print(request.method)
     if request.method == 'POST':

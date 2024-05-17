@@ -1,13 +1,11 @@
 from django import forms
-from django_countries.fields import CountryField
 
 class ContactInformationForm(forms.Form):
-    full_name = forms.CharField()
-    street_name = forms.CharField()
-    house_number = forms.IntegerField()
-    city = forms.CharField()
-    country = CountryField(blank_label="select country")
-    postal_code = forms.CharField()
+    full_name = forms.CharField(max_length=100, required=True)
+    street_name = forms.CharField(max_length=120)
+    house_number = forms.IntegerField(max_value=999)
+    city = forms.CharField(max_length=100)
+    postal_code = forms.CharField(max_length=5)
     def __init__(self, *args, **kwargs):
         super(ContactInformationForm, self).__init__(*args, **kwargs)
 
@@ -31,6 +29,7 @@ class ContactInformationForm(forms.Form):
             'placeholder': 'City',
             'style': 'width: 300px;'
         })
+
         self.fields['postal_code'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': '000',
