@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from Users.models import Employer
 from Jobs.models import Experience, JobListing, JobApplication, JobSeeker, Recommendation
