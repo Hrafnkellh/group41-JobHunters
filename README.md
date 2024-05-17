@@ -2,6 +2,8 @@
 
 We tested the website on firefox.
 
+For some reason the icons on the front page seem to go out of their boxes when using chrome so please don't use it.
+
 You can use it by running the following commands from the root directory of the application (the one this readme is in)
 python -m venv venv
 venv\scripts\activate
