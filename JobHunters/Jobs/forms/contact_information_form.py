@@ -2,7 +2,7 @@ from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
-#
+#contact information form
 class ContactInformationForm(forms.Form):
     full_name = forms.CharField(max_length=100, required=True)
     country = CountryField(blank_label='(select country)').formfield(widget=CountrySelectWidget())
@@ -12,7 +12,7 @@ class ContactInformationForm(forms.Form):
     postal_code = forms.CharField(max_length=5, required=True)
     def __init__(self, *args, **kwargs):
         super(ContactInformationForm, self).__init__(*args, **kwargs)
-
+        #styles and apearance for evey field in contact form.
         self.fields['full_name'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'full name',
