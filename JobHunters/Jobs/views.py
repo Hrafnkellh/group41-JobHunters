@@ -1,12 +1,14 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from Users.models import Employer
 from Jobs.models import JobListing, JobApplication, JobSeeker
 from Jobs.forms.contact_information_form import ContactInformationForm
 from Jobs.forms.cover_letter_form import CoverLetterForm
 from Jobs.forms.experiences_form import ExperiencesForm
 from Jobs.forms.recommendations_form import RecommendationsForm
 from django.utils.dateparse import parse_date
+
 
 # Create your views here.
 def index(request):
