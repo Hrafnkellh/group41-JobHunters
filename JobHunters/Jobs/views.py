@@ -89,9 +89,8 @@ def JAP_1_1(request,id):
         form = ContactInformationForm()
         print("its a post malone1_1")
         if form.is_valid():
-            form.cleaned_data
-            form = ContactInformationForm(data=request.POST)
             form.save()
+            form = ContactInformationForm(data=request.POST)
             return render('JobApp_1_2')
             #return redirect('log_in')
 
